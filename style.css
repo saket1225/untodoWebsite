@@ -414,6 +414,134 @@ footer p {
   font-size: 0.85rem;
 }
 
+/* Hero badges */
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 14px;
+  border-radius: 100px;
+  border: 1px solid #2a2a2a;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Rounds Timeline */
+.rounds-timeline {
+  margin-top: 40px;
+}
+
+.round {
+  display: flex;
+  gap: 28px;
+}
+
+.round-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.round-num {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 1px solid #333;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.round-line {
+  width: 1px;
+  flex: 1;
+  background: var(--border);
+  min-height: 20px;
+}
+
+.round:last-child .round-line {
+  display: none;
+}
+
+.round-content {
+  padding-bottom: 40px;
+}
+
+.round-content h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 4px 0 12px;
+  color: var(--text);
+}
+
+.round-content p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.round-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.round-tag {
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Command badges */
+.command-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.command-badge.new {
+  background: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.command-badge.updated {
+  background: rgba(251, 191, 36, 0.1);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.command-note {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-style: italic;
+  padding-left: 2px;
+}
+
 /* Responsive */
 @media (max-width: 640px) {
   .nav-links {
@@ -449,5 +577,18 @@ footer p {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+
+  .round {
+    gap: 16px;
+  }
+
+  .hero-badges {
+    gap: 6px;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    padding: 3px 10px;
   }
 }
