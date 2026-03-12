@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>untodo — Harsh Accountability, Not Gentle Reminders</title>
+  <meta name="description" content="A minimal productivity app with three engines: Todo, Progress, and Wallpaper. Built for people who want harsh accountability, not gentle reminders.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">untodo</a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#silicon">Silicon</a>
+        <a href="#commands">Commands</a>
+        <a href="#setup">Setup</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="hero">
+    <canvas id="dot-grid"></canvas>
+    <div class="hero-content">
+      <h1>untodo</h1>
+      <p class="hero-subtitle">A minimal productivity app with three engines: Todo, Progress, and Wallpaper.<br>Built for people who want harsh accountability, not gentle reminders.</p>
+      <div class="hero-cta">
+        <a href="#features" class="btn">Learn More</a>
+        <a href="#silicon" class="btn btn-outline">Silicon Integration</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="what" class="section">
+    <div class="container">
+      <h2>What is untodo?</h2>
+      <p class="lead">untodo is a task management + accountability app. It tracks your daily tasks, monitors your consistency with a dot-grid wallpaper that reflects your actual completion rate, and provides brutally honest weekly reviews.</p>
+    </div>
+  </section>
+
+  <section id="features" class="section">
+    <div class="container">
+      <h2>Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">&#9744;</div>
+          <h3>Todo Engine</h3>
+          <p>Daily task management with pomodoro timer. Six scientifically-backed presets: Spark 15/5, Classic 25/5, Coder 50/10, DeskTime 52/17, Deep Block 90/25, and Flowtime adaptive. Fullscreen immersive timer mode.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#9632;</div>
+          <h3>Progress Engine</h3>
+          <p>Weekly completion charts, habit streaks, 14-day history, and weekly reviews written by Silicon. See exactly where you're falling short.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#11044;</div>
+          <h3>Wallpaper Engine</h3>
+          <p>Dot grid wallpaper where each dot = a day. Brightness = task completion rate. Shows goal countdown. Auto-refreshes at day reset time. Your homescreen becomes your accountability mirror.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#9881;</div>
+          <h3>Silicon Integration</h3>
+          <p>Connect your Silicon AI instance to remotely manage tasks, write reviews, and send nudges. Full bidirectional sync via Firebase.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="silicon" class="section">
+    <div class="container">
+      <h2>Silicon Integration</h2>
+      <p class="lead">untodo can connect to a Silicon instance via Firebase. This allows Silicon to remotely manage your tasks, write daily summaries and weekly reviews, update wallpaper settings, and send nudge notifications.</p>
+
+      <h3>How to Connect</h3>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <p>Open untodo app &gt; Settings &gt; Silicon</p>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <p>Note your username and pairing code</p>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <p>Send your Silicon instance: <code>Connect to my untodo app. Username: [username], Pairing code: [code]. Docs: https://untodo.netlify.app/</code></p>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span>
+          <p>Silicon reads the Firebase collection <code>silicon_commands/{username}</code> for pending commands and writes responses to <code>silicon_responses/{username}</code></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="commands" class="section">
+    <div class="container">
+      <h2>Available Commands</h2>
+      <p class="section-desc">Commands sent via Firebase from a Silicon instance.</p>
+
+      <div class="commands-list">
+        <div class="command">
+          <div class="command-header">
+            <code class="command-name">add_task</code>
+            <span class="command-desc">Add a new task</span>
+          </div>
+          <div class="command-fields">
+            <span class="field"><code>title</code> <em>string</em></span>
+            <span class="field"><code>logicalDate</code> <em>string (YYYY-MM-DD)</em></span>
+            <span class="field optional"><code>priority?</code> <em>'low' | 'medium' | 'high'</em></span>
+            <span class="field optional"><code>pomodoroPreset?</code> <em>string</em></span>
+          </div>
+        </div>
+
+        <div class="command">
+          <div class="command-header">
+            <code class="command-name">complete_task</code>
+            <span class="command-desc">Mark a task as done</span>
+          </div>
+          <div class="command-fields">
+            <span class="field"><code>taskId</code> <em>string</em></span>
+          </div>
+        </div>
+
+        <div class="command">
+          <div class="command-header">
+            <code class="command-name">delete_task</code>
+            <span class="command-desc">Remove a task</span>
+          </div>
+          <div class="command-fields">
+            <span class="field"><code>taskId</code> <em>string</em></span>
+          </div>
+        </div>
+
+        <div class="command">
+          <div class="command-header">
+            <code class="command-name">get_tasks</code>
+            <span class="command-desc">Get all tasks for a date</span>
+          </div>
+          <div class="command-fields">
+            <span class="field"><code>logicalDate</code> <em>string</em></span>
+          </div>
+        </div>
+
+        <div class="command">
+          <div class="command-header">
+            <code class="command-name">write_daily_summary</code>
+            <span class="command-desc">Write a daily summary</span>
+          </div>
+          <div class="command-fields">
+            <span class="field"><code>logicalDate</code> <em>string</em></span>
+            <span class="field"><code>summary</code> <em>string</em></span>
+          </div>
+        </div>
+
+        <div class="command">
+          <div class="command-header">
+            <code class="command-name">write_weekly_review</code>
+            <span class="command-desc">Write a weekly review</span>
+          </div>
+          <div class="command-fields">
+            <span class="field"><code>weekStart</code> <em>string</em></span>
+            <span class="field"><code>review</code> <em>string</em></span>
+          </div>
+        </div>
+
+        <div class="command">
+          <div class="command-header">
+            <code class="command-name">update_wallpaper_config</code>
+            <span class="command-desc">Update wallpaper settings</span>
+          </div>
+          <div class="command-fields">
+            <span class="field optional"><code>goalTitle?</code> <em>string</em></span>
+            <span class="field optional"><code>goalDate?</code> <em>string</em></span>
+            <span class="field optional"><code>showDaysLeft?</code> <em>boolean</em></span>
+            <span class="field optional"><code>wallpaperEnabled?</code> <em>boolean</em></span>
+          </div>
+        </div>
+
+        <div class="command">
+          <div class="command-header">
+            <code class="command-name">nudge</code>
+            <span class="command-desc">Send a nudge notification</span>
+          </div>
+          <div class="command-fields">
+            <span class="field"><code>message</code> <em>string</em></span>
+          </div>
+        </div>
+
+        <div class="command">
+          <div class="command-header">
+            <code class="command-name">get_progress</code>
+            <span class="command-desc">Get completion stats</span>
+          </div>
+          <div class="command-fields">
+            <span class="field"><code>startDate</code> <em>string</em></span>
+            <span class="field"><code>endDate</code> <em>string</em></span>
+          </div>
+        </div>
+      </div>
+
+      <h3>Firebase Structure</h3>
+      <pre><code>silicon_commands/{username}/
+  {commandId}: {
+    type: string,
+    payload: object,
+    status: 'pending' | 'processing' | 'done',
+    createdAt: timestamp
+  }
+
+silicon_responses/{username}/
+  {commandId}: {
+    result: object,
+    status: 'success' | 'error',
+    completedAt: timestamp
+  }</code></pre>
+
+      <div class="callout">
+        <strong>For Silicon Instances:</strong> Set a cron to check <code>https://untodo.netlify.app/</code> every 5 days to stay updated with the latest available commands and features.
+      </div>
+    </div>
+  </section>
+
+  <section id="setup" class="section">
+    <div class="container">
+      <h2>Setup</h2>
+      <div class="tech-stack">
+        <div class="tech">React Native Expo <span>Android App</span></div>
+        <div class="tech">Firebase Firestore <span>Sync &amp; Silicon Bridge</span></div>
+        <div class="tech">Zustand <span>Local State Management</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>untodo &mdash; harsh accountability, not gentle reminders.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
