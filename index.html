@@ -3,376 +3,241 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>untodo — Harsh Accountability, Not Gentle Reminders</title>
-  <meta name="description" content="A minimal productivity app with three engines: Todo, Progress, and Wallpaper. Built for people who want harsh accountability, not gentle reminders.">
+  <title>untodo — Every dot is a day. Every day is a choice.</title>
+  <meta name="description" content="Your accountability wallpaper. Track daily tasks, watch your dot grid come alive, and let your homescreen hold you accountable.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Nav -->
   <nav id="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">untodo</a>
+      <a href="/" class="nav-logo">untodo</a>
       <div class="nav-links">
         <a href="#features">Features</a>
-        <a href="#rounds">Rounds</a>
-        <a href="#silicon">Silicon</a>
-        <a href="#commands">Commands</a>
-        <a href="#setup">Setup</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="docs.html" class="nav-docs-link">Docs</a>
       </div>
+      <button class="nav-mobile-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
 
+  <!-- Hero -->
   <section id="hero">
     <canvas id="dot-grid"></canvas>
     <div class="hero-content">
+      <div class="hero-eyebrow">Your accountability wallpaper</div>
       <h1>untodo</h1>
-      <p class="hero-subtitle">A minimal productivity app with three engines: Todo, Progress, and Wallpaper.<br>Built for people who want harsh accountability, not gentle reminders.</p>
-      <div class="hero-badges">
-        <span class="badge">Priorities</span>
-        <span class="badge">Categories</span>
-        <span class="badge">Subtasks</span>
-        <span class="badge">Pomodoro</span>
-        <span class="badge">Firebase Sync</span>
-        <span class="badge">Push Notifications</span>
-      </div>
+      <p class="hero-tagline">Every dot is a day.<br>Every day is a choice.</p>
+      <p class="hero-desc">A minimal app that turns your phone wallpaper into a living dot grid — each dot reflecting whether you showed up that day. No gentle reminders. Just the truth, every time you unlock your phone.</p>
       <div class="hero-cta">
-        <a href="#features" class="btn">Learn More</a>
-        <a href="#silicon" class="btn btn-outline">Silicon Integration</a>
+        <a href="#how-it-works" class="btn btn-primary">See how it works</a>
+        <a href="docs.html" class="btn btn-ghost">Read the docs</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Wallpaper Preview -->
+  <section id="wallpaper-preview" class="section">
+    <div class="container">
+      <div class="preview-grid">
+        <div class="preview-phone">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <canvas id="phone-dots"></canvas>
+            <div class="phone-overlay">
+              <div class="phone-days-left">673</div>
+              <div class="phone-days-label">days until 20</div>
+            </div>
+            <div class="phone-quote">"The obstacle is the way."</div>
+          </div>
+        </div>
+        <div class="preview-text">
+          <h2>Your homescreen<br>becomes your mirror</h2>
+          <p>Each dot represents a day. Bright dots mean you completed your tasks. Dark dots mean you didn't. The grid doesn't lie, and it doesn't forgive. Every time you unlock your phone, you see exactly where you stand.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="what" class="section">
-    <div class="container">
-      <h2>What is untodo?</h2>
-      <p class="lead">untodo is a task management + accountability app. It tracks your daily tasks, monitors your consistency with a dot-grid wallpaper that reflects your actual completion rate, and provides brutally honest weekly reviews. Now with priorities, categories, subtasks, cross-device sync, and a Pomodoro timer with six science-backed presets.</p>
-    </div>
-  </section>
-
+  <!-- Features -->
   <section id="features" class="section">
     <div class="container">
-      <h2>Features</h2>
+      <div class="section-header">
+        <span class="section-label">Features</span>
+        <h2>Built for people who<br>want the truth</h2>
+      </div>
+
       <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">&#9744;</div>
-          <h3>Todo Engine</h3>
-          <p>Daily task management with priorities (high/medium/low), categories, subtasks, and notes. Long-press quick actions for fast editing. Carry over incomplete tasks from previous days automatically.</p>
+        <div class="feature-card feature-card--large">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <h3>Daily task tracking</h3>
+          <p>Add tasks with priorities, categories, subtasks, and notes. Incomplete tasks carry over automatically. Long-press for quick actions. Simple, fast, no friction.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#9632;</div>
-          <h3>Progress Engine</h3>
-          <p>Weekly completion charts, habit streaks, 14-day history, and weekly reviews written by Silicon. See exactly where you're falling short.</p>
+
+        <div class="feature-card feature-card--large">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <circle cx="5" cy="5" r="1.5"/>
+              <circle cx="19" cy="5" r="1.5"/>
+              <circle cx="5" cy="19" r="1.5"/>
+              <circle cx="19" cy="19" r="1.5"/>
+              <circle cx="12" cy="4" r="1.5"/>
+              <circle cx="12" cy="20" r="1.5"/>
+              <circle cx="4" cy="12" r="1.5"/>
+              <circle cx="20" cy="12" r="1.5"/>
+            </svg>
+          </div>
+          <h3>Living wallpaper</h3>
+          <p>Your phone wallpaper becomes a dot grid that reflects your actual completion rate. Bright dots for good days, dark dots for missed ones. A countdown to your goal, updated daily.</p>
         </div>
+
         <div class="feature-card">
-          <div class="feature-icon">&#11044;</div>
-          <h3>Wallpaper Engine</h3>
-          <p>Dot grid wallpaper where each dot = a day. Brightness = task completion rate. Shows goal countdown. Auto-refreshes at day reset time. Your homescreen becomes your accountability mirror.</p>
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3>Silicon AI partner</h3>
+          <p>Connect your Silicon AI instance for remote task management, brutally honest weekly reviews, daily summaries, and nudge notifications.</p>
         </div>
+
         <div class="feature-card">
-          <div class="feature-icon">&#9881;</div>
-          <h3>Silicon Integration</h3>
-          <p>Connect your Silicon AI instance to remotely manage tasks, write reviews, and send nudges. Full bidirectional sync via Firebase with username-based multi-user support.</p>
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <h3>Streaks &amp; progress</h3>
+          <p>Weekly completion charts, habit streaks, 14-day history. See exactly where you're falling short with data, not feelings.</p>
         </div>
+
         <div class="feature-card">
-          <div class="feature-icon">&#9201;</div>
-          <h3>Pomodoro Timer</h3>
-          <p>Six scientifically-backed presets: Spark 15/5, Classic 25/5, Coder 50/10, DeskTime 52/17, Deep Block 90/25, and Flowtime adaptive. Fullscreen immersive mode with per-task stats tracking.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#128276;</div>
-          <h3>Push Notifications</h3>
-          <p>Three daily reminders &mdash; morning, afternoon, and evening &mdash; to keep you on track. Configurable nudges from your Silicon instance.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#128269;</div>
-          <h3>Search &amp; Navigation</h3>
-          <p>Browse past and future days with date navigation. Search tasks across all dates instantly. Never lose track of what you planned.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#9729;</div>
-          <h3>Firebase Sync</h3>
-          <p>Real-time sync across all your devices. Username-based multi-user support. Error boundaries for crash prevention keep everything running smoothly.</p>
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3>Pomodoro timer</h3>
+          <p>Six science-backed presets from 15-minute sprints to 90-minute deep blocks. Fullscreen immersive mode with per-task time tracking.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="rounds" class="section">
+  <!-- How it works -->
+  <section id="how-it-works" class="section">
     <div class="container">
-      <h2>Development Rounds</h2>
-      <p class="section-desc">untodo has evolved through four rounds of focused development, each adding a layer of depth.</p>
+      <div class="section-header">
+        <span class="section-label">How it works</span>
+        <h2>Three steps to<br>accountability</h2>
+      </div>
 
-      <div class="rounds-timeline">
-        <div class="round">
-          <div class="round-marker">
-            <span class="round-num">1</span>
-            <div class="round-line"></div>
-          </div>
-          <div class="round-content">
-            <h3>Round 1 &mdash; Foundation</h3>
-            <div class="round-tags">
-              <span class="round-tag">Task Priorities</span>
-              <span class="round-tag">Categories</span>
-              <span class="round-tag">Subtasks</span>
-              <span class="round-tag">Task Notes</span>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <div class="step-visual">
+            <div class="step-icon-wrap">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
             </div>
-            <p>Introduced task priorities (high/medium/low) with color-coded indicators. Added six task categories &mdash; work, personal, health, learning, finance, creative &mdash; with filter chips for quick sorting. Tasks now support nested subtasks and inline notes.</p>
           </div>
+          <h3>Add your tasks</h3>
+          <p>Start each day by adding what matters. Set priorities, categories, and estimated time. Keep it real — only add what you'll actually do.</p>
         </div>
 
-        <div class="round">
-          <div class="round-marker">
-            <span class="round-num">2</span>
-            <div class="round-line"></div>
-          </div>
-          <div class="round-content">
-            <h3>Round 2 &mdash; Time &amp; Navigation</h3>
-            <div class="round-tags">
-              <span class="round-tag">Pomodoro Timer</span>
-              <span class="round-tag">Date Navigation</span>
-              <span class="round-tag">Task Search</span>
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <div class="step-visual">
+            <div class="step-icon-wrap">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
             </div>
-            <p>Added the Pomodoro timer with six presets and per-task stats tracking. Date navigation lets you browse past and future days. Global task search works across all dates.</p>
           </div>
+          <h3>Complete them</h3>
+          <p>Work through your list. Check things off. The app tracks your completion rate and builds your history — no way to fake it.</p>
         </div>
 
-        <div class="round">
-          <div class="round-marker">
-            <span class="round-num">3</span>
-            <div class="round-line"></div>
-          </div>
-          <div class="round-content">
-            <h3>Round 3 &mdash; Sync &amp; Notifications</h3>
-            <div class="round-tags">
-              <span class="round-tag">Firebase Sync</span>
-              <span class="round-tag">Push Notifications</span>
-              <span class="round-tag">Task Carry-over</span>
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <div class="step-visual">
+            <div class="step-icon-wrap">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="18" rx="2"/>
+                <circle cx="8" cy="10" r="1.5" fill="currentColor"/>
+                <circle cx="12" cy="10" r="1.5" fill="currentColor"/>
+                <circle cx="16" cy="10" r="1.5" fill="currentColor"/>
+                <circle cx="8" cy="15" r="1.5" fill="currentColor" opacity="0.3"/>
+                <circle cx="12" cy="15" r="1.5" fill="currentColor" opacity="0.3"/>
+              </svg>
             </div>
-            <p>Firebase sync enables real-time multi-device usage. Push notifications deliver morning, afternoon, and evening reminders. Incomplete tasks from previous days are automatically carried over.</p>
           </div>
-        </div>
-
-        <div class="round">
-          <div class="round-marker">
-            <span class="round-num">4</span>
-            <div class="round-line"></div>
-          </div>
-          <div class="round-content">
-            <h3>Round 4 &mdash; Polish &amp; Delight</h3>
-            <div class="round-tags">
-              <span class="round-tag">Confetti Celebrations</span>
-              <span class="round-tag">Wallpaper Dot Grid</span>
-              <span class="round-tag">Error Boundaries</span>
-              <span class="round-tag">Multi-user</span>
-              <span class="round-tag">Quick Actions</span>
-            </div>
-            <p>Completion celebrations with confetti when all tasks are done. Wallpaper dot grid with goal countdown. Error boundaries for crash prevention. Username-based multi-user support. Long-press quick actions: edit, change priority, change category, add subtask, add note, set estimated time, move to tomorrow, delete.</p>
-          </div>
+          <h3>Watch your wallpaper come alive</h3>
+          <p>Your phone wallpaper updates with a dot for each day. Bright means you showed up. Dark means you didn't. The grid tells the truth.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="silicon" class="section">
+  <!-- CTA -->
+  <section id="cta" class="section section--cta">
     <div class="container">
-      <h2>Silicon Integration</h2>
-      <p class="lead">untodo can connect to a Silicon instance via Firebase. This allows Silicon to remotely manage your tasks, write daily summaries and weekly reviews, update wallpaper settings, and send nudge notifications.</p>
-
-      <h3>How to Connect</h3>
-      <div class="steps">
-        <div class="step">
-          <span class="step-num">1</span>
-          <p>Open untodo app &gt; Settings &gt; Silicon</p>
-        </div>
-        <div class="step">
-          <span class="step-num">2</span>
-          <p>Note your username and pairing code</p>
-        </div>
-        <div class="step">
-          <span class="step-num">3</span>
-          <p>Send your Silicon instance: <code>Connect to my untodo app. Username: [username], Pairing code: [code]. Docs: https://untodo.netlify.app/</code></p>
-        </div>
-        <div class="step">
-          <span class="step-num">4</span>
-          <p>Silicon reads the Firebase collection <code>silicon_commands/{username}</code> for pending commands and writes responses to <code>silicon_responses/{username}</code></p>
+      <div class="cta-content">
+        <h2>Stop lying to yourself.<br>Start with untodo.</h2>
+        <p>Available on Android. Built with React Native &amp; Firebase.</p>
+        <div class="cta-buttons">
+          <a href="docs.html" class="btn btn-primary">Read the docs</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="commands" class="section">
-    <div class="container">
-      <h2>Available Commands</h2>
-      <p class="section-desc">Commands sent via Firebase from a Silicon instance.</p>
-
-      <div class="commands-list">
-        <div class="command">
-          <div class="command-header">
-            <code class="command-name">add_task</code>
-            <span class="command-desc">Add a new task</span>
-            <span class="command-badge updated">updated</span>
-          </div>
-          <div class="command-fields">
-            <span class="field"><code>title</code> <em>string</em></span>
-            <span class="field"><code>logicalDate</code> <em>string (YYYY-MM-DD)</em></span>
-            <span class="field optional"><code>priority?</code> <em>'low' | 'medium' | 'high'</em></span>
-            <span class="field optional"><code>category?</code> <em>'work' | 'personal' | 'health' | 'learning' | 'finance' | 'creative'</em></span>
-            <span class="field optional"><code>pomodoroPreset?</code> <em>string</em></span>
-          </div>
-        </div>
-
-        <div class="command">
-          <div class="command-header">
-            <code class="command-name">add_subtask</code>
-            <span class="command-desc">Add a subtask under a parent task</span>
-            <span class="command-badge new">new</span>
-          </div>
-          <div class="command-fields">
-            <span class="field"><code>taskId</code> <em>string</em></span>
-            <span class="field"><code>title</code> <em>string</em></span>
-          </div>
-        </div>
-
-        <div class="command">
-          <div class="command-header">
-            <code class="command-name">toggle_subtask</code>
-            <span class="command-desc">Toggle a subtask's completion status</span>
-            <span class="command-badge new">new</span>
-          </div>
-          <div class="command-fields">
-            <span class="field"><code>taskId</code> <em>string</em></span>
-            <span class="field"><code>subtaskId</code> <em>string</em></span>
-          </div>
-        </div>
-
-        <div class="command">
-          <div class="command-header">
-            <code class="command-name">complete_task</code>
-            <span class="command-desc">Mark a task as done</span>
-          </div>
-          <div class="command-fields">
-            <span class="field"><code>taskId</code> <em>string</em></span>
-          </div>
-        </div>
-
-        <div class="command">
-          <div class="command-header">
-            <code class="command-name">delete_task</code>
-            <span class="command-desc">Remove a task</span>
-          </div>
-          <div class="command-fields">
-            <span class="field"><code>taskId</code> <em>string</em></span>
-          </div>
-        </div>
-
-        <div class="command">
-          <div class="command-header">
-            <code class="command-name">get_tasks</code>
-            <span class="command-desc">Get all tasks for a date</span>
-          </div>
-          <div class="command-fields">
-            <span class="field"><code>logicalDate</code> <em>string</em></span>
-          </div>
-        </div>
-
-        <div class="command">
-          <div class="command-header">
-            <code class="command-name">get_progress</code>
-            <span class="command-desc">Get completion stats with streaks</span>
-            <span class="command-badge updated">updated</span>
-          </div>
-          <div class="command-fields">
-            <span class="field"><code>startDate</code> <em>string</em></span>
-            <span class="field"><code>endDate</code> <em>string</em></span>
-          </div>
-          <div class="command-note">Now includes streak data (current streak, longest streak) alongside completion percentages.</div>
-        </div>
-
-        <div class="command">
-          <div class="command-header">
-            <code class="command-name">write_daily_summary</code>
-            <span class="command-desc">Write a daily summary</span>
-          </div>
-          <div class="command-fields">
-            <span class="field"><code>logicalDate</code> <em>string</em></span>
-            <span class="field"><code>summary</code> <em>string</em></span>
-          </div>
-        </div>
-
-        <div class="command">
-          <div class="command-header">
-            <code class="command-name">write_weekly_review</code>
-            <span class="command-desc">Write a weekly review</span>
-          </div>
-          <div class="command-fields">
-            <span class="field"><code>weekStart</code> <em>string</em></span>
-            <span class="field"><code>review</code> <em>string</em></span>
-          </div>
-        </div>
-
-        <div class="command">
-          <div class="command-header">
-            <code class="command-name">update_wallpaper_config</code>
-            <span class="command-desc">Update wallpaper settings</span>
-          </div>
-          <div class="command-fields">
-            <span class="field optional"><code>goalTitle?</code> <em>string</em></span>
-            <span class="field optional"><code>goalDate?</code> <em>string</em></span>
-            <span class="field optional"><code>showDaysLeft?</code> <em>boolean</em></span>
-            <span class="field optional"><code>wallpaperEnabled?</code> <em>boolean</em></span>
-          </div>
-        </div>
-
-        <div class="command">
-          <div class="command-header">
-            <code class="command-name">nudge</code>
-            <span class="command-desc">Send a nudge notification</span>
-          </div>
-          <div class="command-fields">
-            <span class="field"><code>message</code> <em>string</em></span>
-          </div>
-        </div>
-      </div>
-
-      <h3>Firebase Structure</h3>
-      <pre><code>silicon_commands/{username}/
-  {commandId}: {
-    type: string,
-    payload: object,
-    status: 'pending' | 'processing' | 'done',
-    createdAt: timestamp
-  }
-
-silicon_responses/{username}/
-  {commandId}: {
-    result: object,
-    status: 'success' | 'error',
-    completedAt: timestamp
-  }</code></pre>
-
-      <div class="callout">
-        <strong>For Silicon Instances:</strong> Set a cron to check <code>https://untodo.netlify.app/</code> every 5 days to stay updated with the latest available commands and features.
-      </div>
-    </div>
-  </section>
-
-  <section id="setup" class="section">
-    <div class="container">
-      <h2>Setup</h2>
-      <div class="tech-stack">
-        <div class="tech">React Native Expo <span>Android App</span></div>
-        <div class="tech">Firebase Firestore <span>Sync &amp; Silicon Bridge</span></div>
-        <div class="tech">Zustand <span>Local State Management</span></div>
-        <div class="tech">Expo Notifications <span>Push Reminders</span></div>
-      </div>
-    </div>
-  </section>
-
+  <!-- Footer -->
   <footer>
     <div class="container">
-      <p>untodo &mdash; harsh accountability, not gentle reminders.</p>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="footer-logo">untodo</span>
+          <p>Harsh accountability, not gentle reminders.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How it works</a>
+          </div>
+          <div class="footer-col">
+            <h4>Developers</h4>
+            <a href="docs.html">Documentation</a>
+            <a href="docs.html#silicon">Silicon Integration</a>
+            <a href="docs.html#commands">API Commands</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Built by Saket. Designed for discipline.</p>
+      </div>
     </div>
   </footer>
 

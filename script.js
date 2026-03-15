@@ -1,10 +1,18 @@
-// Dot grid animation for hero section
+// ============================================
+// untodo — Landing Page Scripts
+// ============================================
+
 (function () {
+  'use strict';
+
+  // ---- Hero Dot Grid Animation ----
   const canvas = document.getElementById('dot-grid');
+  if (!canvas) return;
+
   const ctx = canvas.getContext('2d');
   let dots = [];
   let mouse = { x: -1000, y: -1000 };
-  let raf;
+  let animFrame;
 
   function resize() {
     canvas.width = window.innerWidth;
@@ -14,7 +22,7 @@
 
   function initDots() {
     dots = [];
-    const spacing = 40;
+    const spacing = 44;
     const cols = Math.ceil(canvas.width / spacing) + 1;
     const rows = Math.ceil(canvas.height / spacing) + 1;
     const offsetX = (canvas.width - (cols - 1) * spacing) / 2;
@@ -25,15 +33,15 @@
         dots.push({
           x: offsetX + c * spacing,
           y: offsetY + r * spacing,
-          baseAlpha: 0.06 + Math.random() * 0.04,
-          alpha: 0.06,
-          radius: 2,
+          baseAlpha: 0.04 + Math.random() * 0.03,
+          alpha: 0.04,
+          radius: 1.5,
         });
       }
     }
   }
 
-  function draw() {
+  function drawDots() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (let i = 0; i < dots.length; i++) {
@@ -41,15 +49,16 @@
       const dx = mouse.x - d.x;
       const dy = mouse.y - d.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      const maxDist = 180;
+      const maxDist = 200;
 
       if (dist < maxDist) {
         const t = 1 - dist / maxDist;
-        d.alpha += (d.baseAlpha + t * 0.35 - d.alpha) * 0.15;
-        d.radius += (2 + t * 2.5 - d.radius) * 0.15;
+        const ease = t * t;
+        d.alpha += (d.baseAlpha + ease * 0.5 - d.alpha) * 0.12;
+        d.radius += (1.5 + ease * 3 - d.radius) * 0.12;
       } else {
-        d.alpha += (d.baseAlpha - d.alpha) * 0.05;
-        d.radius += (2 - d.radius) * 0.05;
+        d.alpha += (d.baseAlpha - d.alpha) * 0.04;
+        d.radius += (1.5 - d.radius) * 0.04;
       }
 
       ctx.beginPath();
@@ -58,7 +67,7 @@
       ctx.fill();
     }
 
-    raf = requestAnimationFrame(draw);
+    animFrame = requestAnimationFrame(drawDots);
   }
 
   canvas.addEventListener('mousemove', (e) => {
@@ -72,22 +81,106 @@
     mouse.y = -1000;
   });
 
-  window.addEventListener('resize', resize);
-  resize();
-  draw();
+  // Touch support
+  canvas.addEventListener('touchmove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const touch = e.touches[0];
+    mouse.x = touch.clientX - rect.left;
+    mouse.y = touch.clientY - rect.top;
+  }, { passive: true });
 
-  // Smooth scroll for nav links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
+  canvas.addEventListener('touchend', () => {
+    mouse.x = -1000;
+    mouse.y = -1000;
   });
 
-  // Fade-in sections on scroll
+  window.addEventListener('resize', resize);
+  resize();
+  drawDots();
+
+  // ---- Phone Preview Dot Grid ----
+  const phoneCanvas = document.getElementById('phone-dots');
+  if (phoneCanvas) {
+    const pCtx = phoneCanvas.getContext('2d');
+
+    function drawPhoneDots() {
+      const parent = phoneCanvas.parentElement;
+      const w = parent.offsetWidth;
+      const h = parent.offsetHeight;
+      const dpr = window.devicePixelRatio || 1;
+      phoneCanvas.width = w * dpr;
+      phoneCanvas.height = h * dpr;
+      phoneCanvas.style.width = w + 'px';
+      phoneCanvas.style.height = h + 'px';
+      pCtx.scale(dpr, dpr);
+
+      const cols = 15;
+      const spacing = (w - 40) / cols;
+      const dotRadius = spacing * 0.18;
+      const startY = h * 0.32;
+      const endY = h * 0.78;
+      const rows = Math.floor((endY - startY) / spacing);
+      const totalDots = cols * rows;
+
+      // Simulate: ~40% past (completed), 1 today, rest future
+      const pastCount = Math.floor(totalDots * 0.15);
+      const todayIndex = pastCount;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const i = r * cols + c;
+          const x = 20 + c * spacing + spacing / 2;
+          const y = startY + r * spacing + spacing / 2;
+
+          pCtx.beginPath();
+          pCtx.arc(x, y, dotRadius, 0, Math.PI * 2);
+
+          if (i < pastCount) {
+            // Past - completed, brighter
+            const brightness = 0.25 + Math.random() * 0.2;
+            pCtx.fillStyle = `rgba(255, 255, 255, ${brightness})`;
+          } else if (i === todayIndex) {
+            // Today - white with blue ring
+            pCtx.fillStyle = '#ffffff';
+            pCtx.fill();
+            pCtx.beginPath();
+            pCtx.arc(x, y, dotRadius + 3, 0, Math.PI * 2);
+            pCtx.strokeStyle = 'rgba(74, 158, 255, 0.6)';
+            pCtx.lineWidth = 1.5;
+            pCtx.stroke();
+            continue;
+          } else {
+            // Future - very dim
+            pCtx.fillStyle = 'rgba(255, 255, 255, 0.06)';
+          }
+
+          pCtx.fill();
+        }
+      }
+    }
+
+    drawPhoneDots();
+    window.addEventListener('resize', drawPhoneDots);
+  }
+
+  // ---- Scroll Animations (Intersection Observer) ----
+  const animatedElements = document.querySelectorAll(
+    '.section-header, .feature-card, .step-card, .preview-grid, .cta-content, .preview-phone'
+  );
+
+  animatedElements.forEach((el) => {
+    el.classList.add('fade-in');
+  });
+
+  // Add stagger delays to grid items
+  document.querySelectorAll('.feature-card').forEach((card, i) => {
+    card.style.transitionDelay = `${i * 0.08}s`;
+  });
+
+  document.querySelectorAll('.step-card').forEach((card, i) => {
+    card.style.transitionDelay = `${i * 0.1}s`;
+  });
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -96,18 +189,49 @@
         }
       });
     },
-    { threshold: 0.1 }
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
   );
 
-  document.querySelectorAll('.section').forEach((section) => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(30px)';
-    section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(section);
-  });
-})();
+  animatedElements.forEach((el) => observer.observe(el));
 
-// CSS class for visible sections
-const style = document.createElement('style');
-style.textContent = '.section.visible { opacity: 1 !important; transform: translateY(0) !important; }';
-document.head.appendChild(style);
+  // ---- Smooth Scroll ----
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      // Close mobile nav if open
+      const navLinks = document.querySelector('.nav-links');
+      const toggle = document.querySelector('.nav-mobile-toggle');
+      if (navLinks) navLinks.classList.remove('open');
+      if (toggle) toggle.classList.remove('active');
+    });
+  });
+
+  // ---- Mobile Nav Toggle ----
+  const toggle = document.querySelector('.nav-mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (toggle && navLinks) {
+    toggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      toggle.classList.toggle('active');
+    });
+  }
+
+  // ---- Nav background on scroll ----
+  const nav = document.getElementById('nav');
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    if (scrollY > 100) {
+      nav.style.borderBottomColor = 'rgba(255, 255, 255, 0.08)';
+    } else {
+      nav.style.borderBottomColor = 'rgba(255, 255, 255, 0.06)';
+    }
+    lastScroll = scrollY;
+  }, { passive: true });
+
+})();

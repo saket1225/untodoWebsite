@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>untodo — Documentation</title>
+  <meta name="description" content="Developer documentation for untodo. Silicon integration, available commands, Firebase structure, and setup guide.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body class="docs-body">
+
+  <!-- Nav -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">untodo</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="#silicon">Silicon</a>
+        <a href="#commands">Commands</a>
+        <a href="#firebase">Firebase</a>
+      </div>
+      <button class="nav-mobile-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-section">
+          <h4>Getting Started</h4>
+          <a href="#overview">Overview</a>
+          <a href="#tech-stack">Tech Stack</a>
+        </div>
+        <div class="sidebar-section">
+          <h4>Silicon Integration</h4>
+          <a href="#silicon">How to Connect</a>
+          <a href="#silicon-architecture">Architecture</a>
+        </div>
+        <div class="sidebar-section">
+          <h4>API Reference</h4>
+          <a href="#commands">Commands</a>
+          <a href="#firebase">Firebase Structure</a>
+        </div>
+        <div class="sidebar-section">
+          <h4>App Features</h4>
+          <a href="#wallpaper-engine">Wallpaper Engine</a>
+          <a href="#pomodoro">Pomodoro Timer</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-main">
+      <!-- Overview -->
+      <section id="overview" class="docs-section">
+        <div class="docs-section-header">
+          <h1>Documentation</h1>
+          <p class="docs-lead">Everything you need to integrate with untodo, understand the architecture, and build on top of it.</p>
+        </div>
+      </section>
+
+      <!-- Tech Stack -->
+      <section id="tech-stack" class="docs-section">
+        <h2>Tech Stack</h2>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <div class="tech-name">React Native Expo</div>
+            <div class="tech-desc">Android app framework</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-name">Firebase Firestore</div>
+            <div class="tech-desc">Real-time sync &amp; Silicon bridge</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-name">Zustand</div>
+            <div class="tech-desc">Local state management</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-name">Expo Notifications</div>
+            <div class="tech-desc">Push reminders</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Silicon Integration -->
+      <section id="silicon" class="docs-section">
+        <h2>Silicon Integration</h2>
+        <p>untodo connects to a Silicon AI instance via Firebase Firestore. This enables remote task management, daily summaries, weekly reviews, wallpaper configuration, and nudge notifications — all controlled by your AI partner.</p>
+
+        <h3>How to Connect</h3>
+        <div class="docs-steps">
+          <div class="docs-step">
+            <div class="docs-step-num">1</div>
+            <div class="docs-step-content">
+              <h4>Open Silicon Settings</h4>
+              <p>In the untodo app, go to <strong>Settings &rarr; Silicon</strong>. You'll see your username and a generated pairing code.</p>
+            </div>
+          </div>
+          <div class="docs-step">
+            <div class="docs-step-num">2</div>
+            <div class="docs-step-content">
+              <h4>Share Credentials</h4>
+              <p>Send your Silicon instance the following message:</p>
+              <div class="code-block">
+                <pre><code>Connect to my untodo app.
+Username: [your_username]
+Pairing code: [your_code]
+Docs: https://untodo.netlify.app/docs.html</code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="docs-step">
+            <div class="docs-step-num">3</div>
+            <div class="docs-step-content">
+              <h4>Start Using</h4>
+              <p>Silicon will authenticate with Firebase using email/password auth and begin reading commands from your <code>silicon_commands</code> collection.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Architecture -->
+      <section id="silicon-architecture" class="docs-section">
+        <h2>Architecture</h2>
+        <p>The Silicon bridge uses a command/response pattern via Firebase Firestore:</p>
+
+        <div class="architecture-flow">
+          <div class="flow-step">
+            <div class="flow-label">Silicon</div>
+            <div class="flow-desc">Writes command to Firestore</div>
+          </div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step">
+            <div class="flow-label">Firebase</div>
+            <div class="flow-desc">Real-time sync</div>
+          </div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step">
+            <div class="flow-label">untodo App</div>
+            <div class="flow-desc">Processes &amp; responds</div>
+          </div>
+        </div>
+
+        <div class="callout callout--info">
+          <strong>For Silicon Instances:</strong> Set a cron to check <code>https://untodo.netlify.app/docs.html</code> periodically to stay updated with the latest available commands and features.
+        </div>
+      </section>
+
+      <!-- Commands -->
+      <section id="commands" class="docs-section">
+        <h2>Available Commands</h2>
+        <p>Commands are sent via Firebase from a Silicon instance. Each command is written to <code>silicon_commands/{username}/{commandId}</code> with <code>status: 'pending'</code>.</p>
+
+        <div class="commands-list">
+          <!-- add_task -->
+          <div class="cmd">
+            <div class="cmd-header">
+              <code class="cmd-name">add_task</code>
+              <span class="cmd-desc">Add a new task</span>
+              <span class="cmd-badge cmd-badge--updated">updated</span>
+            </div>
+            <div class="cmd-params">
+              <div class="param">
+                <code>title</code>
+                <span class="param-type">string</span>
+                <span class="param-req">required</span>
+              </div>
+              <div class="param">
+                <code>logicalDate</code>
+                <span class="param-type">string (YYYY-MM-DD)</span>
+                <span class="param-req">required</span>
+              </div>
+              <div class="param param--optional">
+                <code>priority</code>
+                <span class="param-type">'low' | 'medium' | 'high'</span>
+                <span class="param-opt">optional</span>
+              </div>
+              <div class="param param--optional">
+                <code>category</code>
+                <span class="param-type">'work' | 'personal' | 'health' | 'learning' | 'finance' | 'creative'</span>
+                <span class="param-opt">optional</span>
+              </div>
+              <div class="param param--optional">
+                <code>pomodoroPreset</code>
+                <span class="param-type">string</span>
+                <span class="param-opt">optional</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- add_subtask -->
+          <div class="cmd">
+            <div class="cmd-header">
+              <code class="cmd-name">add_subtask</code>
+              <span class="cmd-desc">Add a subtask under a parent task</span>
+              <span class="cmd-badge cmd-badge--new">new</span>
+            </div>
+            <div class="cmd-params">
+              <div class="param">
+                <code>taskId</code>
+                <span class="param-type">string</span>
+                <span class="param-req">required</span>
+              </div>
+              <div class="param">
+                <code>title</code>
+                <span class="param-type">string</span>
+                <span class="param-req">required</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- toggle_subtask -->
+          <div class="cmd">
+            <div class="cmd-header">
+              <code class="cmd-name">toggle_subtask</code>
+              <span class="cmd-desc">Toggle a subtask's completion</span>
+              <span class="cmd-badge cmd-badge--new">new</span>
+            </div>
+            <div class="cmd-params">
+              <div class="param">
+                <code>taskId</code>
+                <span class="param-type">string</span>
+                <span class="param-req">required</span>
+              </div>
+              <div class="param">
+                <code>subtaskId</code>
+                <span class="param-type">string</span>
+                <span class="param-req">required</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- complete_task -->
+          <div class="cmd">
+            <div class="cmd-header">
+              <code class="cmd-name">complete_task</code>
+              <span class="cmd-desc">Mark a task as done</span>
+            </div>
+            <div class="cmd-params">
+              <div class="param">
+                <code>taskId</code>
+                <span class="param-type">string</span>
+                <span class="param-req">required</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- delete_task -->
+          <div class="cmd">
+            <div class="cmd-header">
+              <code class="cmd-name">delete_task</code>
+              <span class="cmd-desc">Remove a task</span>
+            </div>
+            <div class="cmd-params">
+              <div class="param">
+                <code>taskId</code>
+                <span class="param-type">string</span>
+                <span class="param-req">required</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- get_tasks -->
+          <div class="cmd">
+            <div class="cmd-header">
+              <code class="cmd-name">get_tasks</code>
+              <span class="cmd-desc">Get all tasks for a date</span>
+            </div>
+            <div class="cmd-params">
+              <div class="param">
+                <code>logicalDate</code>
+                <span class="param-type">string (YYYY-MM-DD)</span>
+                <span class="param-req">required</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- get_progress -->
+          <div class="cmd">
+            <div class="cmd-header">
+              <code class="cmd-name">get_progress</code>
+              <span class="cmd-desc">Get completion stats with streaks</span>
+              <span class="cmd-badge cmd-badge--updated">updated</span>
+            </div>
+            <div class="cmd-params">
+              <div class="param">
+                <code>startDate</code>
+                <span class="param-type">string (YYYY-MM-DD)</span>
+                <span class="param-req">required</span>
+              </div>
+              <div class="param">
+                <code>endDate</code>
+                <span class="param-type">string (YYYY-MM-DD)</span>
+                <span class="param-req">required</span>
+              </div>
+            </div>
+            <div class="cmd-note">Returns streak data (current streak, longest streak) alongside daily completion percentages.</div>
+          </div>
+
+          <!-- write_daily_summary -->
+          <div class="cmd">
+            <div class="cmd-header">
+              <code class="cmd-name">write_daily_summary</code>
+              <span class="cmd-desc">Write a daily summary</span>
+            </div>
+            <div class="cmd-params">
+              <div class="param">
+                <code>logicalDate</code>
+                <span class="param-type">string (YYYY-MM-DD)</span>
+                <span class="param-req">required</span>
+              </div>
+              <div class="param">
+                <code>summary</code>
+                <span class="param-type">string</span>
+                <span class="param-req">required</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- write_weekly_review -->
+          <div class="cmd">
+            <div class="cmd-header">
+              <code class="cmd-name">write_weekly_review</code>
+              <span class="cmd-desc">Write a weekly review</span>
+            </div>
+            <div class="cmd-params">
+              <div class="param">
+                <code>weekStart</code>
+                <span class="param-type">string (YYYY-MM-DD)</span>
+                <span class="param-req">required</span>
+              </div>
+              <div class="param">
+                <code>review</code>
+                <span class="param-type">string</span>
+                <span class="param-req">required</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- update_wallpaper_config -->
+          <div class="cmd">
+            <div class="cmd-header">
+              <code class="cmd-name">update_wallpaper_config</code>
+              <span class="cmd-desc">Update wallpaper settings</span>
+            </div>
+            <div class="cmd-params">
+              <div class="param param--optional">
+                <code>goalTitle</code>
+                <span class="param-type">string</span>
+                <span class="param-opt">optional</span>
+              </div>
+              <div class="param param--optional">
+                <code>goalDate</code>
+                <span class="param-type">string (YYYY-MM-DD)</span>
+                <span class="param-opt">optional</span>
+              </div>
+              <div class="param param--optional">
+                <code>showDaysLeft</code>
+                <span class="param-type">boolean</span>
+                <span class="param-opt">optional</span>
+              </div>
+              <div class="param param--optional">
+                <code>wallpaperEnabled</code>
+                <span class="param-type">boolean</span>
+                <span class="param-opt">optional</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- nudge -->
+          <div class="cmd">
+            <div class="cmd-header">
+              <code class="cmd-name">nudge</code>
+              <span class="cmd-desc">Send a nudge notification</span>
+            </div>
+            <div class="cmd-params">
+              <div class="param">
+                <code>message</code>
+                <span class="param-type">string</span>
+                <span class="param-req">required</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Firebase Structure -->
+      <section id="firebase" class="docs-section">
+        <h2>Firebase Structure</h2>
+        <p>Silicon communicates with untodo through two Firestore collections, scoped by username:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Firestore Collections</span>
+          </div>
+          <pre><code><span class="code-comment">// Commands (Silicon → App)</span>
+users/{username}/silicon_commands/{commandId}
+  ├── type: string          <span class="code-comment">// e.g. "add_task"</span>
+  ├── payload: object       <span class="code-comment">// command-specific data</span>
+  ├── status: string        <span class="code-comment">// "pending" | "processing" | "done"</span>
+  └── createdAt: timestamp
+
+<span class="code-comment">// Responses (App → Silicon)</span>
+users/{username}/silicon_responses/{commandId}
+  ├── result: object        <span class="code-comment">// response data</span>
+  ├── status: string        <span class="code-comment">// "success" | "error"</span>
+  └── completedAt: timestamp</code></pre>
+        </div>
+
+        <h3>Command Lifecycle</h3>
+        <ol class="docs-ol">
+          <li>Silicon writes a document to <code>silicon_commands/{commandId}</code> with <code>status: 'pending'</code></li>
+          <li>The untodo app detects the new command via Firestore listener</li>
+          <li>App sets status to <code>'processing'</code>, executes the command</li>
+          <li>App writes the result to <code>silicon_responses/{commandId}</code></li>
+          <li>App sets command status to <code>'done'</code></li>
+        </ol>
+      </section>
+
+      <!-- Wallpaper Engine -->
+      <section id="wallpaper-engine" class="docs-section">
+        <h2>Wallpaper Engine</h2>
+        <p>The wallpaper engine generates a dot grid overlay for your phone's lock screen and home screen. Each dot represents one day between now and your goal date.</p>
+
+        <div class="docs-table-wrap">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Dot State</th>
+                <th>Color</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="dot-sample dot-past"></span> Past (completed)</td>
+                <td><code>#444444</code></td>
+                <td>Tasks were completed that day</td>
+              </tr>
+              <tr>
+                <td><span class="dot-sample dot-today"></span> Today</td>
+                <td>White + blue ring</td>
+                <td>Current day indicator</td>
+              </tr>
+              <tr>
+                <td><span class="dot-sample dot-future"></span> Future</td>
+                <td><code>#1C1C1C</code></td>
+                <td>Days remaining until goal</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>The wallpaper also displays a days-remaining countdown, a daily stoic quote, and your current streak.</p>
+      </section>
+
+      <!-- Pomodoro -->
+      <section id="pomodoro" class="docs-section">
+        <h2>Pomodoro Timer</h2>
+        <p>Six science-backed timer presets, each designed for different types of work:</p>
+
+        <div class="docs-table-wrap">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Preset</th>
+                <th>Work</th>
+                <th>Break</th>
+                <th>Best For</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Spark</td>
+                <td>15 min</td>
+                <td>5 min</td>
+                <td>Quick tasks, getting started</td>
+              </tr>
+              <tr>
+                <td>Classic</td>
+                <td>25 min</td>
+                <td>5 min</td>
+                <td>Standard focused work</td>
+              </tr>
+              <tr>
+                <td>Coder</td>
+                <td>50 min</td>
+                <td>10 min</td>
+                <td>Programming, writing</td>
+              </tr>
+              <tr>
+                <td>DeskTime</td>
+                <td>52 min</td>
+                <td>17 min</td>
+                <td>Productivity research optimal</td>
+              </tr>
+              <tr>
+                <td>Deep Block</td>
+                <td>90 min</td>
+                <td>25 min</td>
+                <td>Deep work sessions</td>
+              </tr>
+              <tr>
+                <td>Flowtime</td>
+                <td>Adaptive</td>
+                <td>Adaptive</td>
+                <td>Flow state, variable focus</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="docs-footer">
+        <p>untodo documentation &mdash; last updated March 2026</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        // Highlight active sidebar link
+        document.querySelectorAll('.docs-sidebar a').forEach(a => a.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Highlight sidebar on scroll
+    const sections = document.querySelectorAll('.docs-section');
+    const sidebarLinks = document.querySelectorAll('.docs-sidebar a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          sidebarLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -60% 0px' });
+
+    sections.forEach(section => observer.observe(section));
+
+    // Mobile nav toggle
+    const toggle = document.querySelector('.nav-mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+        toggle.classList.toggle('active');
+      });
+    }
+  </script>
+</body>
+</html>
