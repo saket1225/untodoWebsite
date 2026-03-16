@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>untodo — Every dot is a day. Every day is a choice.</title>
-  <meta name="description" content="Your accountability wallpaper. Track daily tasks, watch your dot grid come alive, and let your homescreen hold you accountable.">
+  <title>untodo — The app that holds you accountable</title>
+  <meta name="description" content="Task management, focus timers, dynamic wallpapers, and AI integration. Available on Android, iOS, and Mac.">
+  <meta name="theme-color" content="#080808">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +19,8 @@
       <a href="/" class="nav-logo">untodo</a>
       <div class="nav-links">
         <a href="#features">Features</a>
-        <a href="#how-it-works">How it works</a>
+        <a href="#wallpaper">Wallpaper</a>
+        <a href="#focus">Focus</a>
         <a href="docs.html" class="nav-docs-link">Docs</a>
       </div>
       <button class="nav-mobile-toggle" aria-label="Menu">
@@ -31,14 +33,31 @@
   <!-- Hero -->
   <section id="hero">
     <canvas id="dot-grid"></canvas>
+    <div class="hero-glow"></div>
     <div class="hero-content">
-      <div class="hero-eyebrow">Your accountability wallpaper</div>
-      <h1>untodo</h1>
-      <p class="hero-tagline">Every dot is a day.<br>Every day is a choice.</p>
-      <p class="hero-desc">A minimal app that turns your phone wallpaper into a living dot grid — each dot reflecting whether you showed up that day. No gentle reminders. Just the truth, every time you unlock your phone.</p>
+      <div class="hero-badge">v4.0 &mdash; Android, iOS, Mac</div>
+      <h1>Stop planning.<br>Start doing.</h1>
+      <p class="hero-sub">Tasks, focus timers, dynamic wallpapers, and an AI that won't let you slack. One app that turns intention into action.</p>
       <div class="hero-cta">
-        <a href="#how-it-works" class="btn btn-primary">See how it works</a>
+        <a href="#features" class="btn btn-primary">
+          <span>Explore features</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M13 8l-5 5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
         <a href="docs.html" class="btn btn-ghost">Read the docs</a>
+      </div>
+      <div class="hero-platforms">
+        <div class="platform-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 2.777l1.627 2.82a11.02 11.02 0 0 1 2.85 7.4c0 .756-.076 1.494-.222 2.205h-5.16a5.5 5.5 0 1 0-9.236 0H2.222A11.11 11.11 0 0 1 2 12.997c0-2.756 1.012-5.279 2.685-7.21L3.05 3.05l1.414-1.414 1.77 1.77A10.945 10.945 0 0 1 12 1.997c2.336 0 4.493.728 6.27 1.97l1.667-1.667 1.414 1.414-1.828 1.063zM12 3.997a9.001 9.001 0 0 0-8.778 11.205h17.556A9.001 9.001 0 0 0 12 3.997zM10 9v2H8V9h2zm6 0v2h-2V9h2z"/></svg>
+          <span>Android</span>
+        </div>
+        <div class="platform-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.624 7.222c-.876 0-2.232-.996-3.636-.984-1.872.012-3.6 1.092-4.56 2.772-1.944 3.372-.504 8.364 1.392 11.1.924 1.344 2.028 2.844 3.48 2.784 1.392-.06 1.92-.9 3.612-.9 1.68 0 2.16.9 3.636.876 1.5-.024 2.448-1.368 3.372-2.712.948-1.38 1.344-2.736 1.368-2.808-.036-.012-2.616-1.008-2.64-3.996-.024-2.496 2.04-3.696 2.136-3.756-1.164-1.716-2.976-1.908-3.624-1.956-1.848-.156-3.6 1.068-4.536 1.068zm3.12-3.516c.768-.936 1.284-2.232 1.14-3.528-1.104.048-2.436.744-3.228 1.668-.708.828-1.332 2.16-1.164 3.432 1.236.096 2.496-.624 3.252-1.572z"/></svg>
+          <span>iOS</span>
+        </div>
+        <div class="platform-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.624 7.222c-.876 0-2.232-.996-3.636-.984-1.872.012-3.6 1.092-4.56 2.772-1.944 3.372-.504 8.364 1.392 11.1.924 1.344 2.028 2.844 3.48 2.784 1.392-.06 1.92-.9 3.612-.9 1.68 0 2.16.9 3.636.876 1.5-.024 2.448-1.368 3.372-2.712.948-1.38 1.344-2.736 1.368-2.808-.036-.012-2.616-1.008-2.64-3.996-.024-2.496 2.04-3.696 2.136-3.756-1.164-1.716-2.976-1.908-3.624-1.956-1.848-.156-3.6 1.068-4.536 1.068zm3.12-3.516c.768-.936 1.284-2.232 1.14-3.528-1.104.048-2.436.744-3.228 1.668-.708.828-1.332 2.16-1.164 3.432 1.236.096 2.496-.624 3.252-1.572z"/></svg>
+          <span>Mac</span>
+        </div>
       </div>
     </div>
     <div class="hero-scroll-hint">
@@ -46,168 +65,308 @@
     </div>
   </section>
 
-  <!-- Wallpaper Preview -->
-  <section id="wallpaper-preview" class="section">
-    <div class="container">
-      <div class="preview-grid">
-        <div class="preview-phone">
-          <div class="phone-frame">
-            <div class="phone-notch"></div>
-            <canvas id="phone-dots"></canvas>
-            <div class="phone-overlay">
-              <div class="phone-days-left">673</div>
-              <div class="phone-days-label">days until 20</div>
-            </div>
-            <div class="phone-quote">"The obstacle is the way."</div>
-          </div>
-        </div>
-        <div class="preview-text">
-          <h2>Your homescreen<br>becomes your mirror</h2>
-          <p>Each dot represents a day. Bright dots mean you completed your tasks. Dark dots mean you didn't. The grid doesn't lie, and it doesn't forgive. Every time you unlock your phone, you see exactly where you stand.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features -->
+  <!-- Features Overview -->
   <section id="features" class="section">
     <div class="container">
-      <div class="section-header">
-        <span class="section-label">Features</span>
-        <h2>Built for people who<br>want the truth</h2>
+      <div class="section-header center">
+        <span class="section-label">What you get</span>
+        <h2>Everything you need.<br>Nothing you don't.</h2>
       </div>
 
-      <div class="features-grid">
-        <div class="feature-card feature-card--large">
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="2"/>
-              <path d="M9 12l2 2 4-4"/>
-            </svg>
+      <div class="features-bento">
+        <!-- Task Management - large card -->
+        <div class="bento-card bento-large" data-reveal>
+          <div class="bento-card-inner">
+            <div class="bento-visual">
+              <div class="task-demo">
+                <div class="task-item completed">
+                  <div class="task-check checked"></div>
+                  <div class="task-info">
+                    <span class="task-title">Ship v4.0 release</span>
+                    <span class="task-meta">High priority</span>
+                  </div>
+                  <span class="task-grade grade-a">A</span>
+                </div>
+                <div class="task-item completed">
+                  <div class="task-check checked"></div>
+                  <div class="task-info">
+                    <span class="task-title">Review pull requests</span>
+                    <span class="task-meta">2 subtasks</span>
+                  </div>
+                </div>
+                <div class="task-item">
+                  <div class="task-check"></div>
+                  <div class="task-info">
+                    <span class="task-title">Write documentation</span>
+                    <span class="task-meta">Medium priority</span>
+                  </div>
+                </div>
+                <div class="task-item">
+                  <div class="task-check"></div>
+                  <div class="task-info">
+                    <span class="task-title">Deploy to production</span>
+                    <span class="task-meta">Recurring</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bento-text">
+              <h3>Task management that respects your time</h3>
+              <p>Swipe gestures, drag reorder, priorities, categories, subtasks, recurring tasks, templates. Daily scoring with letter grades. A morning brief to start your day. Undo when you mess up. Confetti when you don't.</p>
+            </div>
           </div>
-          <h3>Daily task tracking</h3>
-          <p>Add tasks with priorities, categories, subtasks, and notes. Incomplete tasks carry over automatically. Long-press for quick actions. Simple, fast, no friction.</p>
         </div>
 
-        <div class="feature-card feature-card--large">
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="3"/>
-              <circle cx="5" cy="5" r="1.5"/>
-              <circle cx="19" cy="5" r="1.5"/>
-              <circle cx="5" cy="19" r="1.5"/>
-              <circle cx="19" cy="19" r="1.5"/>
-              <circle cx="12" cy="4" r="1.5"/>
-              <circle cx="12" cy="20" r="1.5"/>
-              <circle cx="4" cy="12" r="1.5"/>
-              <circle cx="20" cy="12" r="1.5"/>
-            </svg>
+        <!-- Progress & Analytics -->
+        <div class="bento-card bento-tall" data-reveal>
+          <div class="bento-card-inner">
+            <div class="bento-visual">
+              <div class="progress-demo">
+                <div class="progress-ring-wrap">
+                  <svg class="progress-ring" viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+                    <circle class="progress-ring-fill" cx="60" cy="60" r="52" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="72" transform="rotate(-90 60 60)"/>
+                  </svg>
+                  <div class="progress-ring-text">78%</div>
+                </div>
+                <div class="streak-badge">12 day streak</div>
+                <div class="heatmap-mini">
+                  <div class="heatmap-row"></div>
+                </div>
+              </div>
+            </div>
+            <div class="bento-text">
+              <h3>Progress you can feel</h3>
+              <p>Completion rings, fire streaks, weekly charts, 91-day heatmap. 10 achievements to unlock. Shareable progress cards.</p>
+            </div>
           </div>
-          <h3>Living wallpaper</h3>
-          <p>Your phone wallpaper becomes a dot grid that reflects your actual completion rate. Bright dots for good days, dark dots for missed ones. A countdown to your goal, updated daily.</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-              <path d="M2 17l10 5 10-5"/>
-              <path d="M2 12l10 5 10-5"/>
-            </svg>
+        <!-- Pomodoro -->
+        <div class="bento-card" data-reveal>
+          <div class="bento-card-inner">
+            <div class="bento-visual">
+              <div class="timer-demo">
+                <div class="timer-display">
+                  <span class="timer-minutes">25</span>
+                  <span class="timer-colon">:</span>
+                  <span class="timer-seconds">00</span>
+                </div>
+                <div class="timer-presets">
+                  <span class="preset-tag">Spark 15m</span>
+                  <span class="preset-tag active">Classic 25m</span>
+                  <span class="preset-tag">Deep 90m</span>
+                </div>
+              </div>
+            </div>
+            <div class="bento-text">
+              <h3>Focus mode</h3>
+              <p>7 science-backed presets. Immersive fullscreen. Per-task time tracking.</p>
+            </div>
           </div>
-          <h3>Silicon AI partner</h3>
-          <p>Connect your Silicon AI instance for remote task management, brutally honest weekly reviews, daily summaries, and nudge notifications.</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
+        <!-- Silicon AI -->
+        <div class="bento-card" data-reveal>
+          <div class="bento-card-inner">
+            <div class="bento-visual">
+              <div class="ai-demo">
+                <div class="ai-message ai-incoming">
+                  <span class="ai-label">Silicon</span>
+                  <span>You haven't touched "Write docs" in 3 days. Starting now or removing it?</span>
+                </div>
+                <div class="ai-message ai-outgoing">
+                  <span>Starting now.</span>
+                </div>
+              </div>
+            </div>
+            <div class="bento-text">
+              <h3>AI that doesn't sugarcoat</h3>
+              <p>Silicon manages your tasks, sends nudges, writes daily summaries, and gives weekly reviews.</p>
+            </div>
           </div>
-          <h3>Streaks &amp; progress</h3>
-          <p>Weekly completion charts, habit streaks, 14-day history. See exactly where you're falling short with data, not feelings.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
-            </svg>
-          </div>
-          <h3>Pomodoro timer</h3>
-          <p>Six science-backed presets from 15-minute sprints to 90-minute deep blocks. Fullscreen immersive mode with per-task time tracking.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- How it works -->
-  <section id="how-it-works" class="section">
+  <!-- Wallpaper Showcase -->
+  <section id="wallpaper" class="section">
     <div class="container">
-      <div class="section-header">
-        <span class="section-label">How it works</span>
-        <h2>Three steps to<br>accountability</h2>
+      <div class="section-header center">
+        <span class="section-label">Dynamic wallpaper</span>
+        <h2>Your homescreen<br>becomes your mirror</h2>
+        <p class="section-desc">Every dot is a day. Bright means you showed up. Dark means you didn't. The grid doesn't lie. Choose from 12 visual styles, or build your own.</p>
       </div>
 
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-number">01</div>
-          <div class="step-visual">
-            <div class="step-icon-wrap">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
+      <div class="wallpaper-showcase">
+        <div class="wallpaper-track">
+          <div class="phone-mockup" data-style="Minimal">
+            <div class="phone-bezel">
+              <div class="phone-notch"></div>
+              <canvas class="phone-canvas" data-theme="minimal"></canvas>
+              <div class="phone-ui">
+                <div class="phone-days">673</div>
+                <div class="phone-label">days until 20</div>
+              </div>
+              <div class="phone-quote-text">"The obstacle is the way."</div>
             </div>
+            <div class="phone-style-name">Minimal</div>
           </div>
-          <h3>Add your tasks</h3>
-          <p>Start each day by adding what matters. Set priorities, categories, and estimated time. Keep it real — only add what you'll actually do.</p>
+          <div class="phone-mockup" data-style="Terminal">
+            <div class="phone-bezel terminal-theme">
+              <div class="phone-notch"></div>
+              <canvas class="phone-canvas" data-theme="terminal"></canvas>
+              <div class="phone-ui terminal-ui">
+                <div class="phone-days">673</div>
+                <div class="phone-label">days until 20</div>
+              </div>
+              <div class="phone-quote-text terminal-quote">$ echo "discipline"</div>
+            </div>
+            <div class="phone-style-name">Terminal</div>
+          </div>
+          <div class="phone-mockup" data-style="Neon">
+            <div class="phone-bezel neon-theme">
+              <div class="phone-notch"></div>
+              <canvas class="phone-canvas" data-theme="neon"></canvas>
+              <div class="phone-ui neon-ui">
+                <div class="phone-days">673</div>
+                <div class="phone-label">days until 20</div>
+              </div>
+              <div class="phone-quote-text neon-quote">"Begin at once to live."</div>
+            </div>
+            <div class="phone-style-name">Neon</div>
+          </div>
+          <div class="phone-mockup" data-style="Cosmic">
+            <div class="phone-bezel cosmic-theme">
+              <div class="phone-notch"></div>
+              <canvas class="phone-canvas" data-theme="cosmic"></canvas>
+              <div class="phone-ui cosmic-ui">
+                <div class="phone-days">673</div>
+                <div class="phone-label">days until 20</div>
+              </div>
+              <div class="phone-quote-text cosmic-quote">"Memento mori."</div>
+            </div>
+            <div class="phone-style-name">Cosmic</div>
+          </div>
+          <div class="phone-mockup" data-style="Blueprint">
+            <div class="phone-bezel blueprint-theme">
+              <div class="phone-notch"></div>
+              <canvas class="phone-canvas" data-theme="blueprint"></canvas>
+              <div class="phone-ui blueprint-ui">
+                <div class="phone-days">673</div>
+                <div class="phone-label">days until 20</div>
+              </div>
+              <div class="phone-quote-text blueprint-quote">"Plan. Execute. Repeat."</div>
+            </div>
+            <div class="phone-style-name">Blueprint</div>
+          </div>
         </div>
+        <p class="wallpaper-count">+ 7 more styles. Fully customizable.</p>
+      </div>
+    </div>
+  </section>
 
-        <div class="step-card">
-          <div class="step-number">02</div>
-          <div class="step-visual">
-            <div class="step-icon-wrap">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
+  <!-- Focus Section -->
+  <section id="focus" class="section">
+    <div class="container">
+      <div class="focus-layout">
+        <div class="focus-text" data-reveal>
+          <span class="section-label">Deep work</span>
+          <h2>Lock in.<br>No distractions.</h2>
+          <p>Immersive focus mode takes over your screen. Pick a preset or go custom. The timer tracks time per task so you know exactly where your hours go.</p>
+          <div class="focus-presets-list">
+            <div class="focus-preset-item">
+              <span class="fp-name">Spark</span>
+              <span class="fp-time">15 min</span>
+            </div>
+            <div class="focus-preset-item">
+              <span class="fp-name">Classic</span>
+              <span class="fp-time">25 min</span>
+            </div>
+            <div class="focus-preset-item">
+              <span class="fp-name">Coder</span>
+              <span class="fp-time">50 min</span>
+            </div>
+            <div class="focus-preset-item">
+              <span class="fp-name">DeskTime</span>
+              <span class="fp-time">52 min</span>
+            </div>
+            <div class="focus-preset-item">
+              <span class="fp-name">Deep Block</span>
+              <span class="fp-time">90 min</span>
+            </div>
+            <div class="focus-preset-item">
+              <span class="fp-name">Flowtime</span>
+              <span class="fp-time">Adaptive</span>
+            </div>
+            <div class="focus-preset-item">
+              <span class="fp-name">Custom</span>
+              <span class="fp-time">You decide</span>
             </div>
           </div>
-          <h3>Complete them</h3>
-          <p>Work through your list. Check things off. The app tracks your completion rate and builds your history — no way to fake it.</p>
         </div>
-
-        <div class="step-card">
-          <div class="step-number">03</div>
-          <div class="step-visual">
-            <div class="step-icon-wrap">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="3" width="20" height="18" rx="2"/>
-                <circle cx="8" cy="10" r="1.5" fill="currentColor"/>
-                <circle cx="12" cy="10" r="1.5" fill="currentColor"/>
-                <circle cx="16" cy="10" r="1.5" fill="currentColor"/>
-                <circle cx="8" cy="15" r="1.5" fill="currentColor" opacity="0.3"/>
-                <circle cx="12" cy="15" r="1.5" fill="currentColor" opacity="0.3"/>
-              </svg>
+        <div class="focus-visual" data-reveal>
+          <div class="focus-timer-big">
+            <svg class="focus-ring" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="4"/>
+              <circle class="focus-ring-progress" cx="100" cy="100" r="90" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="4" stroke-linecap="round" stroke-dasharray="565" stroke-dashoffset="141" transform="rotate(-90 100 100)"/>
+            </svg>
+            <div class="focus-timer-inner">
+              <div class="focus-timer-time">18:42</div>
+              <div class="focus-timer-label">Classic Pomodoro</div>
             </div>
           </div>
-          <h3>Watch your wallpaper come alive</h3>
-          <p>Your phone wallpaper updates with a dot for each day. Bright means you showed up. Dark means you didn't. The grid tells the truth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-platform -->
+  <section id="sync" class="section section-sync">
+    <div class="container">
+      <div class="section-header center">
+        <span class="section-label">Cross-platform</span>
+        <h2>One account.<br>Every device.</h2>
+        <p class="section-desc">Your tasks, streaks, and progress sync seamlessly across Android, iOS, and Mac. Start on your phone, finish on your laptop.</p>
+      </div>
+      <div class="sync-devices" data-reveal>
+        <div class="sync-device">
+          <div class="sync-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+          </div>
+          <span>Phone</span>
+        </div>
+        <div class="sync-line"></div>
+        <div class="sync-device">
+          <div class="sync-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <span>Desktop</span>
+        </div>
+        <div class="sync-line"></div>
+        <div class="sync-device">
+          <div class="sync-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="14" rx="2"/><line x1="2" y1="19" x2="22" y2="19"/></svg>
+          </div>
+          <span>Tablet</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section id="cta" class="section section--cta">
+  <section id="cta" class="section section-cta">
     <div class="container">
-      <div class="cta-content">
-        <h2>Stop lying to yourself.<br>Start with untodo.</h2>
-        <p>Available on Android.</p>
+      <canvas id="cta-dots"></canvas>
+      <div class="cta-content" data-reveal>
+        <h2>Your future self<br>is watching.</h2>
+        <p>Available now on Android, iOS, and Mac. Free to start.</p>
         <div class="cta-buttons">
-          <a href="docs.html" class="btn btn-primary">Read the docs</a>
+          <a href="docs.html" class="btn btn-primary btn-lg">
+            <span>Get started</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
         </div>
       </div>
     </div>
@@ -219,19 +378,20 @@
       <div class="footer-inner">
         <div class="footer-brand">
           <span class="footer-logo">untodo</span>
-          <p>Harsh accountability, not gentle reminders.</p>
+          <p>Accountability, not reminders.</p>
         </div>
         <div class="footer-links">
           <div class="footer-col">
             <h4>Product</h4>
             <a href="#features">Features</a>
-            <a href="#how-it-works">How it works</a>
+            <a href="#wallpaper">Wallpaper</a>
+            <a href="#focus">Focus mode</a>
           </div>
           <div class="footer-col">
             <h4>Developers</h4>
             <a href="docs.html">Documentation</a>
-            <a href="docs.html#silicon">Silicon Integration</a>
-            <a href="docs.html#commands">API Commands</a>
+            <a href="docs.html#silicon">Silicon AI</a>
+            <a href="docs.html#commands">API commands</a>
           </div>
         </div>
       </div>

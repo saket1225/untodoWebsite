@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>untodo — Documentation</title>
-  <meta name="description" content="Developer documentation for untodo. Silicon integration, available commands, Firebase structure, and setup guide.">
+  <meta name="description" content="Complete documentation for untodo v4.0.0. Task management, Pomodoro focus, dynamic wallpaper engine, progress analytics, and Silicon AI integration.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -19,9 +19,9 @@
       <a href="/" class="nav-logo">untodo</a>
       <div class="nav-links">
         <a href="/">Home</a>
+        <a href="#features">Features</a>
+        <a href="#wallpaper-engine">Wallpaper</a>
         <a href="#silicon">Silicon</a>
-        <a href="#commands">Commands</a>
-        <a href="#firebase">Firebase</a>
       </div>
       <button class="nav-mobile-toggle" aria-label="Menu">
         <span></span>
@@ -37,22 +37,26 @@
         <div class="sidebar-section">
           <h4>Getting Started</h4>
           <a href="#overview">Overview</a>
-          <a href="#tech-stack">Tech Stack</a>
+          <a href="#getting-started">Quick Start</a>
+        </div>
+        <div class="sidebar-section">
+          <h4>Features</h4>
+          <a href="#tasks">Task Management</a>
+          <a href="#pomodoro">Pomodoro & Focus</a>
+          <a href="#progress">Progress & Analytics</a>
+          <a href="#wallpaper-engine">Wallpaper Engine</a>
         </div>
         <div class="sidebar-section">
           <h4>Silicon Integration</h4>
           <a href="#silicon">How to Connect</a>
           <a href="#silicon-architecture">Architecture</a>
-        </div>
-        <div class="sidebar-section">
-          <h4>API Reference</h4>
-          <a href="#commands">Commands</a>
+          <a href="#commands">Commands Reference</a>
           <a href="#firebase">Firebase Structure</a>
         </div>
         <div class="sidebar-section">
-          <h4>App Features</h4>
-          <a href="#wallpaper-engine">Wallpaper Engine</a>
-          <a href="#pomodoro">Pomodoro Timer</a>
+          <h4>Technical</h4>
+          <a href="#tech-stack">Tech Stack</a>
+          <a href="#data-privacy">Data & Privacy</a>
         </div>
       </div>
     </aside>
@@ -63,37 +67,407 @@
       <section id="overview" class="docs-section">
         <div class="docs-section-header">
           <h1>Documentation</h1>
-          <p class="docs-lead">Everything you need to integrate with untodo, understand the architecture, and build on top of it.</p>
+          <p class="docs-lead">Complete guide to untodo v4.0.0 &mdash; task management, focus tools, dynamic wallpapers, progress analytics, and Silicon AI integration.</p>
+        </div>
+        <div class="docs-version-badge">v4.0.0</div>
+      </section>
+
+      <!-- Getting Started -->
+      <section id="getting-started" class="docs-section">
+        <h2>Getting Started</h2>
+        <p>untodo is organized around four main tabs: <strong>Today</strong>, <strong>Progress</strong>, <strong>Wallpaper</strong>, and <strong>Settings</strong>. Everything revolves around your daily task list.</p>
+
+        <div class="docs-steps">
+          <div class="docs-step">
+            <div class="docs-step-num">1</div>
+            <div class="docs-step-content">
+              <h4>Add Your First Task</h4>
+              <p>Tap the add button on the Today tab. Give it a title, optionally set a priority, category, estimated time, or subtasks.</p>
+            </div>
+          </div>
+          <div class="docs-step">
+            <div class="docs-step-num">2</div>
+            <div class="docs-step-content">
+              <h4>Complete Tasks</h4>
+              <p>Swipe right to complete, swipe left to delete, or long-press for quick actions. Watch your daily score climb toward an A+.</p>
+            </div>
+          </div>
+          <div class="docs-step">
+            <div class="docs-step-num">3</div>
+            <div class="docs-step-content">
+              <h4>Track Your Progress</h4>
+              <p>Head to the Progress tab to see your streak, weekly chart, heatmap, and achievements. Set up a dynamic wallpaper to stay motivated.</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Tech Stack -->
-      <section id="tech-stack" class="docs-section">
-        <h2>Tech Stack</h2>
-        <div class="tech-grid">
-          <div class="tech-card">
-            <div class="tech-name">React Native Expo</div>
-            <div class="tech-desc">Android app framework</div>
+      <!-- Task Management -->
+      <section id="tasks" class="docs-section">
+        <h2>Task Management</h2>
+        <p>The Today tab is your daily command center. Every task has a rich set of properties and interactions.</p>
+
+        <h3>Core Interactions</h3>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <strong>Swipe right</strong> to complete &mdash; triggers confetti animation + haptic feedback
+            </div>
           </div>
-          <div class="tech-card">
-            <div class="tech-name">Firebase Firestore</div>
-            <div class="tech-desc">Real-time sync &amp; Silicon bridge</div>
+          <div class="feature-item">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            </div>
+            <div>
+              <strong>Swipe left</strong> to delete &mdash; with undo toast
+            </div>
           </div>
-          <div class="tech-card">
-            <div class="tech-name">Zustand</div>
-            <div class="tech-desc">Local state management</div>
+          <div class="feature-item">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </div>
+            <div>
+              <strong>Long-press</strong> for quick actions menu
+            </div>
           </div>
-          <div class="tech-card">
-            <div class="tech-name">Expo Notifications</div>
-            <div class="tech-desc">Push reminders</div>
+          <div class="feature-item">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+            </div>
+            <div>
+              <strong>Drag-and-drop</strong> to reorder tasks
+            </div>
           </div>
         </div>
+
+        <h3>Task Properties</h3>
+        <div class="docs-table-wrap">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Priority</td>
+                <td><span class="priority-dot priority-high"></span> High &nbsp; <span class="priority-dot priority-medium"></span> Medium &nbsp; <span class="priority-dot priority-low"></span> Low</td>
+              </tr>
+              <tr>
+                <td>Category</td>
+                <td>Work, Personal, Health, Learning, Finance, Creative</td>
+              </tr>
+              <tr>
+                <td>Subtasks</td>
+                <td>Individual completion tracking per subtask</td>
+              </tr>
+              <tr>
+                <td>Notes</td>
+                <td>Free-text notes attached to any task</td>
+              </tr>
+              <tr>
+                <td>Estimated Time</td>
+                <td>Set expected duration for time planning</td>
+              </tr>
+              <tr>
+                <td>Recurrence</td>
+                <td>Daily, Weekly, or Custom days</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Templates</h3>
+        <p>Quick-start your day with pre-built task sets:</p>
+        <div class="template-grid">
+          <div class="template-card">
+            <div class="template-name">Morning Routine</div>
+          </div>
+          <div class="template-card">
+            <div class="template-name">Study Session</div>
+          </div>
+          <div class="template-card">
+            <div class="template-name">Workout</div>
+          </div>
+          <div class="template-card">
+            <div class="template-name">Deep Work Block</div>
+          </div>
+        </div>
+
+        <h3>Scoring</h3>
+        <p>Every day gets a letter grade based on task completion:</p>
+        <div class="grade-scale">
+          <span class="grade grade-a">A+</span>
+          <span class="grade grade-a">A</span>
+          <span class="grade grade-b">B</span>
+          <span class="grade grade-c">C</span>
+          <span class="grade grade-d">D</span>
+          <span class="grade grade-f">F</span>
+        </div>
+        <p>Incomplete tasks auto carry-over to the next day. A <strong>Morning Brief</strong> modal (5am&ndash;12pm) shows you what's on deck.</p>
+
+        <h3>Audio Tasks</h3>
+        <p>Record voice memos as tasks &mdash; perfect for capturing ideas on the go.</p>
+      </section>
+
+      <!-- Pomodoro & Focus -->
+      <section id="pomodoro" class="docs-section">
+        <h2>Pomodoro & Focus</h2>
+        <p>Seven science-backed timer presets, each designed for different types of work. Attach any preset to a task for per-task time tracking.</p>
+
+        <div class="docs-table-wrap">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Preset</th>
+                <th>Work</th>
+                <th>Break</th>
+                <th>Best For</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Spark</td>
+                <td>15 min</td>
+                <td>5 min</td>
+                <td>Quick tasks, getting started</td>
+              </tr>
+              <tr>
+                <td>Classic</td>
+                <td>25 min</td>
+                <td>5 min</td>
+                <td>Standard focused work</td>
+              </tr>
+              <tr>
+                <td>Coder 50</td>
+                <td>50 min</td>
+                <td>10 min</td>
+                <td>Programming, writing</td>
+              </tr>
+              <tr>
+                <td>DeskTime</td>
+                <td>52 min</td>
+                <td>17 min</td>
+                <td>Productivity research optimal</td>
+              </tr>
+              <tr>
+                <td>Deep Block</td>
+                <td>90 min</td>
+                <td>25 min</td>
+                <td>Deep work sessions</td>
+              </tr>
+              <tr>
+                <td>Flowtime</td>
+                <td>Adaptive</td>
+                <td>Adaptive</td>
+                <td>Flow state, variable focus</td>
+              </tr>
+              <tr>
+                <td>Custom</td>
+                <td>You decide</td>
+                <td>You decide</td>
+                <td>Your own rhythm</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Focus Mode</h3>
+        <p>An immersive single-task view that blocks everything else. Just you and the task. Sessions are logged with break suggestions based on your work pattern.</p>
+      </section>
+
+      <!-- Progress & Analytics -->
+      <section id="progress" class="docs-section">
+        <h2>Progress & Analytics</h2>
+        <p>The Progress tab gives you a complete picture of your productivity over time.</p>
+
+        <h3>Dashboard</h3>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div>
+              <strong>Completion ring</strong> &mdash; animated daily progress with letter grade
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div>
+              <strong>Fire streak</strong> &mdash; consecutive days with 50%+ completion
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+            </div>
+            <div>
+              <strong>Weekly bar chart</strong> &mdash; 7-day completion rates at a glance
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            </div>
+            <div>
+              <strong>91-day heatmap</strong> &mdash; contribution-style grid showing daily activity
+            </div>
+          </div>
+        </div>
+
+        <h3>Deep Stats</h3>
+        <p>Best streak, most productive day of the week, peak productive hour, and trend analysis over time. Share your progress with a shareable progress card.</p>
+
+        <h3>Achievements</h3>
+        <div class="achievements-grid">
+          <div class="achievement">
+            <div class="achievement-name">First Task</div>
+          </div>
+          <div class="achievement">
+            <div class="achievement-name">On a Roll</div>
+          </div>
+          <div class="achievement">
+            <div class="achievement-name">Week Warrior</div>
+          </div>
+          <div class="achievement">
+            <div class="achievement-name">Centurion</div>
+          </div>
+          <div class="achievement">
+            <div class="achievement-name">Focus Master</div>
+          </div>
+          <div class="achievement">
+            <div class="achievement-name">Night Owl</div>
+          </div>
+          <div class="achievement">
+            <div class="achievement-name">Early Bird</div>
+          </div>
+          <div class="achievement">
+            <div class="achievement-name">Perfect Day</div>
+          </div>
+          <div class="achievement">
+            <div class="achievement-name">Perfect Week</div>
+          </div>
+          <div class="achievement achievement-more">
+            <div class="achievement-name">+ more</div>
+          </div>
+        </div>
+
+        <h3>Milestones</h3>
+        <p>Celebration moments at <strong>10</strong>, <strong>25</strong>, <strong>50</strong>, <strong>100</strong>, <strong>250</strong>, <strong>500</strong>, and <strong>1,000</strong> completed tasks.</p>
+      </section>
+
+      <!-- Wallpaper Engine -->
+      <section id="wallpaper-engine" class="docs-section">
+        <h2>Wallpaper Engine</h2>
+        <p>Generate a dynamic wallpaper that updates daily. A dot grid where each dot represents one day between now and your goal date &mdash; a visual countdown on your lock screen.</p>
+
+        <h3>Presets</h3>
+        <div class="preset-grid">
+          <div class="preset-card">
+            <div class="preset-name">Minimal</div>
+            <div class="preset-desc">Clean dot grid only</div>
+          </div>
+          <div class="preset-card">
+            <div class="preset-name">Countdown</div>
+            <div class="preset-desc">Days left + dot grid</div>
+          </div>
+          <div class="preset-card">
+            <div class="preset-name">Full</div>
+            <div class="preset-desc">Everything enabled</div>
+          </div>
+          <div class="preset-card">
+            <div class="preset-name">Stats</div>
+            <div class="preset-desc">Progress-focused layout</div>
+          </div>
+        </div>
+
+        <h3>Visual Styles</h3>
+        <p>12 distinct aesthetics to match your vibe:</p>
+        <div class="style-tags">
+          <span class="style-tag">Minimal</span>
+          <span class="style-tag">Terminal</span>
+          <span class="style-tag">Gradient</span>
+          <span class="style-tag">Neon</span>
+          <span class="style-tag">Paper</span>
+          <span class="style-tag">Blueprint</span>
+          <span class="style-tag">Minimal Dark</span>
+          <span class="style-tag">Cosmic</span>
+          <span class="style-tag">Sunrise</span>
+          <span class="style-tag">Ocean</span>
+          <span class="style-tag">Blood</span>
+          <span class="style-tag">Snow</span>
+        </div>
+
+        <h3>Dot Grid</h3>
+        <p>Each dot is one day. Past days are dimmed, today is highlighted, future days fade into the background.</p>
+        <div class="docs-table-wrap">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Dot State</th>
+                <th>Color</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="dot-sample dot-past"></span> Past</td>
+                <td><code>#444444</code></td>
+                <td>Day has passed</td>
+              </tr>
+              <tr>
+                <td><span class="dot-sample dot-today"></span> Today</td>
+                <td>White + glow ring</td>
+                <td>Current day marker</td>
+              </tr>
+              <tr>
+                <td><span class="dot-sample dot-future"></span> Future</td>
+                <td><code>#1C1C1C</code></td>
+                <td>Days remaining</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Goal Countdown</h3>
+        <p>Set a custom date and title. The wallpaper shows the days remaining in large type alongside the dot grid.</p>
+
+        <h3>Daily Quotes</h3>
+        <p>80+ stoic and memento mori quotes, deterministically picked per day. A new quote every morning.</p>
+
+        <h3>Full Customization</h3>
+        <div class="feature-list compact">
+          <div class="feature-item">
+            <div class="feature-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+            <div>Dot size, spacing, and opacity</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg></div>
+            <div>Custom colors for past, today, and future dots</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+            <div>Column count, padding, and grid alignment</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+            <div>Today marker style and glow controls</div>
+          </div>
+        </div>
+
+        <p>Real-time preview in the Wallpaper tab. Auto-updates daily.</p>
       </section>
 
       <!-- Silicon Integration -->
       <section id="silicon" class="docs-section">
         <h2>Silicon Integration</h2>
-        <p>untodo connects to a Silicon AI instance via Firebase Firestore. This enables remote task management, daily summaries, weekly reviews, wallpaper configuration, and nudge notifications — all controlled by your AI partner.</p>
+        <p>Connect untodo to a Silicon AI instance via Firebase Firestore. This enables remote task management, daily summaries, weekly reviews, wallpaper configuration, and push notification nudges &mdash; all controlled by your AI partner.</p>
 
         <h3>How to Connect</h3>
         <div class="docs-steps">
@@ -101,7 +475,7 @@
             <div class="docs-step-num">1</div>
             <div class="docs-step-content">
               <h4>Open Silicon Settings</h4>
-              <p>In the untodo app, go to <strong>Settings &rarr; Silicon</strong>. You'll see your username and a generated pairing code.</p>
+              <p>In the untodo app, go to <strong>Settings &rarr; Silicon</strong>. You'll see your username and a generated 6-character pairing code.</p>
             </div>
           </div>
           <div class="docs-step">
@@ -121,7 +495,7 @@ Docs: https://untodo.netlify.app/docs.html</code></pre>
             <div class="docs-step-num">3</div>
             <div class="docs-step-content">
               <h4>Start Using</h4>
-              <p>Silicon will authenticate with Firebase using email/password auth and begin reading commands from your <code>silicon_commands</code> collection.</p>
+              <p>Silicon authenticates with Firebase using email/password auth and begins listening to your <code>silicon_commands</code> collection. Commands are processed in real-time.</p>
             </div>
           </div>
         </div>
@@ -154,10 +528,10 @@ Docs: https://untodo.netlify.app/docs.html</code></pre>
         </div>
       </section>
 
-      <!-- Commands -->
+      <!-- Commands Reference -->
       <section id="commands" class="docs-section">
-        <h2>Available Commands</h2>
-        <p>Commands are sent via Firebase from a Silicon instance. Each command is written to <code>silicon_commands/{username}/{commandId}</code> with <code>status: 'pending'</code>.</p>
+        <h2>Commands Reference</h2>
+        <p>12 commands available via the Silicon bridge. Each command is written to <code>silicon_commands/{username}/{commandId}</code> with <code>status: 'pending'</code>.</p>
 
         <div class="commands-list">
           <!-- add_task -->
@@ -165,7 +539,6 @@ Docs: https://untodo.netlify.app/docs.html</code></pre>
             <div class="cmd-header">
               <code class="cmd-name">add_task</code>
               <span class="cmd-desc">Add a new task</span>
-              <span class="cmd-badge cmd-badge--updated">updated</span>
             </div>
             <div class="cmd-params">
               <div class="param">
@@ -201,7 +574,6 @@ Docs: https://untodo.netlify.app/docs.html</code></pre>
             <div class="cmd-header">
               <code class="cmd-name">add_subtask</code>
               <span class="cmd-desc">Add a subtask under a parent task</span>
-              <span class="cmd-badge cmd-badge--new">new</span>
             </div>
             <div class="cmd-params">
               <div class="param">
@@ -222,7 +594,6 @@ Docs: https://untodo.netlify.app/docs.html</code></pre>
             <div class="cmd-header">
               <code class="cmd-name">toggle_subtask</code>
               <span class="cmd-desc">Toggle a subtask's completion</span>
-              <span class="cmd-badge cmd-badge--new">new</span>
             </div>
             <div class="cmd-params">
               <div class="param">
@@ -242,7 +613,7 @@ Docs: https://untodo.netlify.app/docs.html</code></pre>
           <div class="cmd">
             <div class="cmd-header">
               <code class="cmd-name">complete_task</code>
-              <span class="cmd-desc">Mark a task as done</span>
+              <span class="cmd-desc">Toggle a task's completion</span>
             </div>
             <div class="cmd-params">
               <div class="param">
@@ -288,7 +659,6 @@ Docs: https://untodo.netlify.app/docs.html</code></pre>
             <div class="cmd-header">
               <code class="cmd-name">get_progress</code>
               <span class="cmd-desc">Get completion stats with streaks</span>
-              <span class="cmd-badge cmd-badge--updated">updated</span>
             </div>
             <div class="cmd-params">
               <div class="param">
@@ -379,12 +749,27 @@ Docs: https://untodo.netlify.app/docs.html</code></pre>
           <div class="cmd">
             <div class="cmd-header">
               <code class="cmd-name">nudge</code>
-              <span class="cmd-desc">Send a nudge notification</span>
+              <span class="cmd-desc">Send a push notification nudge</span>
             </div>
             <div class="cmd-params">
               <div class="param">
                 <code>message</code>
                 <span class="param-type">string</span>
+                <span class="param-req">required</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- pair -->
+          <div class="cmd">
+            <div class="cmd-header">
+              <code class="cmd-name">pair</code>
+              <span class="cmd-desc">Pair a Silicon instance</span>
+            </div>
+            <div class="cmd-params">
+              <div class="param">
+                <code>pairingCode</code>
+                <span class="param-type">string (6-char)</span>
                 <span class="param-req">required</span>
               </div>
             </div>
@@ -401,14 +786,14 @@ Docs: https://untodo.netlify.app/docs.html</code></pre>
           <div class="code-header">
             <span>Firestore Collections</span>
           </div>
-          <pre><code><span class="code-comment">// Commands (Silicon → App)</span>
+          <pre><code><span class="code-comment">// Commands (Silicon &rarr; App)</span>
 users/{username}/silicon_commands/{commandId}
   ├── type: string          <span class="code-comment">// e.g. "add_task"</span>
   ├── payload: object       <span class="code-comment">// command-specific data</span>
   ├── status: string        <span class="code-comment">// "pending" | "processing" | "done"</span>
   └── createdAt: timestamp
 
-<span class="code-comment">// Responses (App → Silicon)</span>
+<span class="code-comment">// Responses (App &rarr; Silicon)</span>
 users/{username}/silicon_responses/{commandId}
   ├── result: object        <span class="code-comment">// response data</span>
   ├── status: string        <span class="code-comment">// "success" | "error"</span>
@@ -418,109 +803,99 @@ users/{username}/silicon_responses/{commandId}
         <h3>Command Lifecycle</h3>
         <ol class="docs-ol">
           <li>Silicon writes a document to <code>silicon_commands/{commandId}</code> with <code>status: 'pending'</code></li>
-          <li>The untodo app detects the new command via Firestore listener</li>
+          <li>The untodo app detects the new command via Firestore real-time listener</li>
           <li>App sets status to <code>'processing'</code>, executes the command</li>
           <li>App writes the result to <code>silicon_responses/{commandId}</code></li>
           <li>App sets command status to <code>'done'</code></li>
         </ol>
       </section>
 
-      <!-- Wallpaper Engine -->
-      <section id="wallpaper-engine" class="docs-section">
-        <h2>Wallpaper Engine</h2>
-        <p>The wallpaper engine generates a dot grid overlay for your phone's lock screen and home screen. Each dot represents one day between now and your goal date.</p>
-
-        <div class="docs-table-wrap">
-          <table class="docs-table">
-            <thead>
-              <tr>
-                <th>Dot State</th>
-                <th>Color</th>
-                <th>Meaning</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="dot-sample dot-past"></span> Past (completed)</td>
-                <td><code>#444444</code></td>
-                <td>Tasks were completed that day</td>
-              </tr>
-              <tr>
-                <td><span class="dot-sample dot-today"></span> Today</td>
-                <td>White + blue ring</td>
-                <td>Current day indicator</td>
-              </tr>
-              <tr>
-                <td><span class="dot-sample dot-future"></span> Future</td>
-                <td><code>#1C1C1C</code></td>
-                <td>Days remaining until goal</td>
-              </tr>
-            </tbody>
-          </table>
+      <!-- Tech Stack -->
+      <section id="tech-stack" class="docs-section">
+        <h2>Tech Stack</h2>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <div class="tech-name">React Native Expo</div>
+            <div class="tech-desc">SDK 55 &mdash; Android, iOS, Mac (Catalyst)</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-name">Firebase Firestore</div>
+            <div class="tech-desc">Real-time sync, offline support, Silicon bridge</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-name">Zustand</div>
+            <div class="tech-desc">Local state management with persist</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-name">Expo Notifications</div>
+            <div class="tech-desc">5 notification types &mdash; reminders, nudges, streaks, achievements, summaries</div>
+          </div>
         </div>
-
-        <p>The wallpaper also displays a days-remaining countdown, a daily stoic quote, and your current streak.</p>
       </section>
 
-      <!-- Pomodoro -->
-      <section id="pomodoro" class="docs-section">
-        <h2>Pomodoro Timer</h2>
-        <p>Six science-backed timer presets, each designed for different types of work:</p>
+      <!-- Data & Privacy -->
+      <section id="data-privacy" class="docs-section">
+        <h2>Data & Privacy</h2>
+        <p>Your data stays yours.</p>
 
-        <div class="docs-table-wrap">
-          <table class="docs-table">
-            <thead>
-              <tr>
-                <th>Preset</th>
-                <th>Work</th>
-                <th>Break</th>
-                <th>Best For</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Spark</td>
-                <td>15 min</td>
-                <td>5 min</td>
-                <td>Quick tasks, getting started</td>
-              </tr>
-              <tr>
-                <td>Classic</td>
-                <td>25 min</td>
-                <td>5 min</td>
-                <td>Standard focused work</td>
-              </tr>
-              <tr>
-                <td>Coder</td>
-                <td>50 min</td>
-                <td>10 min</td>
-                <td>Programming, writing</td>
-              </tr>
-              <tr>
-                <td>DeskTime</td>
-                <td>52 min</td>
-                <td>17 min</td>
-                <td>Productivity research optimal</td>
-              </tr>
-              <tr>
-                <td>Deep Block</td>
-                <td>90 min</td>
-                <td>25 min</td>
-                <td>Deep work sessions</td>
-              </tr>
-              <tr>
-                <td>Flowtime</td>
-                <td>Adaptive</td>
-                <td>Adaptive</td>
-                <td>Flow state, variable focus</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div>
+              <strong>Firebase Firestore</strong> with per-user scoped collections. No data shared between accounts.
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+            <div>
+              <strong>Full data export</strong> in JSON and CSV formats via Settings.
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <strong>Offline-first</strong> &mdash; Zustand persist + Firestore offline cache. Works without internet.
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div>
+              <strong>Configurable day reset time</strong> &mdash; set when your "day" starts in Settings.
+            </div>
+          </div>
+        </div>
+
+        <h3>Settings</h3>
+        <div class="feature-list compact">
+          <div class="feature-item">
+            <div class="feature-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div>
+            <div>Theme: System / Light / Dark</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+            <div>Notification config (5 types)</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            <div>Data export (JSON &amp; CSV)</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div>Day reset time</div>
+          </div>
         </div>
       </section>
 
       <div class="docs-footer">
-        <p>untodo documentation &mdash; last updated March 2026</p>
+        <p>untodo v4.0.0 documentation &mdash; last updated March 2026</p>
       </div>
     </main>
   </div>
@@ -534,7 +909,6 @@ users/{username}/silicon_responses/{commandId}
         if (target) {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-        // Highlight active sidebar link
         document.querySelectorAll('.docs-sidebar a').forEach(a => a.classList.remove('active'));
         this.classList.add('active');
       });
