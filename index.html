@@ -13,6 +13,9 @@
 </head>
 <body>
 
+  <!-- Confetti overlay -->
+  <canvas id="confetti-canvas"></canvas>
+
   <!-- Nav -->
   <nav id="nav">
     <div class="nav-inner">
@@ -78,35 +81,51 @@
         <div class="bento-card bento-large" data-reveal>
           <div class="bento-card-inner">
             <div class="bento-visual">
-              <div class="task-demo">
-                <div class="task-item completed">
-                  <div class="task-check checked"></div>
+              <div class="task-demo" id="task-demo">
+                <div class="task-item completed" data-priority="high">
+                  <div class="task-priority-bar priority-high"></div>
+                  <div class="task-check checked">
+                    <svg class="check-icon" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
                   <div class="task-info">
                     <span class="task-title">Ship v4.0 release</span>
                     <span class="task-meta">High priority</span>
                   </div>
-                  <span class="task-grade grade-a">A</span>
+                  <span class="task-grade grade-a" id="task-grade-display">A</span>
                 </div>
-                <div class="task-item completed">
-                  <div class="task-check checked"></div>
+                <div class="task-item completed" data-priority="medium">
+                  <div class="task-priority-bar priority-medium"></div>
+                  <div class="task-check checked">
+                    <svg class="check-icon" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
                   <div class="task-info">
                     <span class="task-title">Review pull requests</span>
                     <span class="task-meta">2 subtasks</span>
                   </div>
                 </div>
-                <div class="task-item">
-                  <div class="task-check"></div>
+                <div class="task-item" data-priority="medium">
+                  <div class="task-priority-bar priority-medium"></div>
+                  <div class="task-check">
+                    <svg class="check-icon" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
                   <div class="task-info">
                     <span class="task-title">Write documentation</span>
                     <span class="task-meta">Medium priority</span>
                   </div>
                 </div>
-                <div class="task-item">
-                  <div class="task-check"></div>
+                <div class="task-item" data-priority="normal">
+                  <div class="task-priority-bar priority-normal"></div>
+                  <div class="task-check">
+                    <svg class="check-icon" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
                   <div class="task-info">
                     <span class="task-title">Deploy to production</span>
                     <span class="task-meta">Recurring</span>
                   </div>
+                </div>
+                <div class="task-input-wrap">
+                  <svg class="task-input-icon" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <input type="text" class="task-input" placeholder="Try adding a task..." maxlength="60" />
                 </div>
               </div>
             </div>
@@ -118,7 +137,7 @@
         </div>
 
         <!-- Progress & Analytics -->
-        <div class="bento-card bento-tall" data-reveal>
+        <div class="bento-card bento-tall" data-reveal id="progress-card">
           <div class="bento-card-inner">
             <div class="bento-visual">
               <div class="progress-demo">
@@ -127,11 +146,13 @@
                     <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
                     <circle class="progress-ring-fill" cx="60" cy="60" r="52" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="72" transform="rotate(-90 60 60)"/>
                   </svg>
-                  <div class="progress-ring-text">78%</div>
+                  <div class="progress-ring-text" id="progress-percent">78%</div>
                 </div>
-                <div class="streak-badge">12 day streak</div>
+                <div class="streak-badge">
+                  <span class="streak-fire">&#x1F525;</span> 12 day streak
+                </div>
                 <div class="heatmap-mini">
-                  <div class="heatmap-row"></div>
+                  <div class="heatmap-row" id="heatmap-row"></div>
                 </div>
               </div>
             </div>
@@ -146,16 +167,20 @@
         <div class="bento-card" data-reveal>
           <div class="bento-card-inner">
             <div class="bento-visual">
-              <div class="timer-demo">
-                <div class="timer-display">
-                  <span class="timer-minutes">25</span>
-                  <span class="timer-colon">:</span>
-                  <span class="timer-seconds">00</span>
+              <div class="timer-demo" id="timer-demo">
+                <div class="timer-display" id="timer-display">
+                  <span class="timer-minutes" id="timer-min">25</span>
+                  <span class="timer-colon" id="timer-colon">:</span>
+                  <span class="timer-seconds" id="timer-sec">00</span>
                 </div>
-                <div class="timer-presets">
-                  <span class="preset-tag">Spark 15m</span>
-                  <span class="preset-tag active">Classic 25m</span>
-                  <span class="preset-tag">Deep 90m</span>
+                <button class="timer-play-btn" id="timer-play" aria-label="Start timer">
+                  <svg class="play-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M6 4l10 6-10 6V4z"/></svg>
+                  <svg class="pause-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><rect x="5" y="4" width="3.5" height="12" rx="1"/><rect x="11.5" y="4" width="3.5" height="12" rx="1"/></svg>
+                </button>
+                <div class="timer-presets" id="timer-presets">
+                  <button class="preset-tag" data-minutes="15">Spark 15m</button>
+                  <button class="preset-tag active" data-minutes="25">Classic 25m</button>
+                  <button class="preset-tag" data-minutes="90">Deep 90m</button>
                 </div>
               </div>
             </div>
@@ -170,13 +195,27 @@
         <div class="bento-card" data-reveal>
           <div class="bento-card-inner">
             <div class="bento-visual">
-              <div class="ai-demo">
-                <div class="ai-message ai-incoming">
-                  <span class="ai-label">Silicon</span>
-                  <span>You haven't touched "Write docs" in 3 days. Starting now or removing it?</span>
+              <div class="ai-demo" id="ai-demo">
+                <div class="ai-messages" id="ai-messages">
+                  <div class="ai-message ai-incoming">
+                    <span class="ai-label">Silicon</span>
+                    <span>You haven't touched "Write docs" in 3 days. Starting now or removing it?</span>
+                  </div>
+                  <div class="ai-message ai-outgoing">
+                    <span>Starting now.</span>
+                  </div>
                 </div>
-                <div class="ai-message ai-outgoing">
-                  <span>Starting now.</span>
+                <div class="ai-typing" id="ai-typing">
+                  <span class="ai-label">Silicon</span>
+                  <div class="typing-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                </div>
+                <div class="ai-input-wrap">
+                  <input type="text" class="ai-input" id="ai-input" placeholder="Ask Silicon anything..." maxlength="120" />
+                  <button class="ai-send-btn" id="ai-send" aria-label="Send">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
                 </div>
               </div>
             </div>
@@ -199,9 +238,17 @@
         <p class="section-desc">Every dot is a day. Bright means you showed up. Dark means you didn't. The grid doesn't lie. Choose from 12 visual styles, or build your own.</p>
       </div>
 
+      <div class="wallpaper-themes" id="wallpaper-themes">
+        <button class="theme-tab active" data-theme="minimal">Minimal</button>
+        <button class="theme-tab" data-theme="terminal">Terminal</button>
+        <button class="theme-tab" data-theme="neon">Neon</button>
+        <button class="theme-tab" data-theme="cosmic">Cosmic</button>
+        <button class="theme-tab" data-theme="blueprint">Blueprint</button>
+      </div>
+
       <div class="wallpaper-showcase">
-        <div class="wallpaper-track">
-          <div class="phone-mockup" data-style="Minimal">
+        <div class="wallpaper-track" id="wallpaper-track">
+          <div class="phone-mockup active" data-style="Minimal" data-theme-id="minimal">
             <div class="phone-bezel">
               <div class="phone-notch"></div>
               <canvas class="phone-canvas" data-theme="minimal"></canvas>
@@ -213,7 +260,7 @@
             </div>
             <div class="phone-style-name">Minimal</div>
           </div>
-          <div class="phone-mockup" data-style="Terminal">
+          <div class="phone-mockup" data-style="Terminal" data-theme-id="terminal">
             <div class="phone-bezel terminal-theme">
               <div class="phone-notch"></div>
               <canvas class="phone-canvas" data-theme="terminal"></canvas>
@@ -225,7 +272,7 @@
             </div>
             <div class="phone-style-name">Terminal</div>
           </div>
-          <div class="phone-mockup" data-style="Neon">
+          <div class="phone-mockup" data-style="Neon" data-theme-id="neon">
             <div class="phone-bezel neon-theme">
               <div class="phone-notch"></div>
               <canvas class="phone-canvas" data-theme="neon"></canvas>
@@ -237,7 +284,7 @@
             </div>
             <div class="phone-style-name">Neon</div>
           </div>
-          <div class="phone-mockup" data-style="Cosmic">
+          <div class="phone-mockup" data-style="Cosmic" data-theme-id="cosmic">
             <div class="phone-bezel cosmic-theme">
               <div class="phone-notch"></div>
               <canvas class="phone-canvas" data-theme="cosmic"></canvas>
@@ -249,7 +296,7 @@
             </div>
             <div class="phone-style-name">Cosmic</div>
           </div>
-          <div class="phone-mockup" data-style="Blueprint">
+          <div class="phone-mockup" data-style="Blueprint" data-theme-id="blueprint">
             <div class="phone-bezel blueprint-theme">
               <div class="phone-notch"></div>
               <canvas class="phone-canvas" data-theme="blueprint"></canvas>
@@ -275,46 +322,46 @@
           <span class="section-label">Deep work</span>
           <h2>Lock in.<br>No distractions.</h2>
           <p>Immersive focus mode takes over your screen. Pick a preset or go custom. The timer tracks time per task so you know exactly where your hours go.</p>
-          <div class="focus-presets-list">
-            <div class="focus-preset-item">
+          <div class="focus-presets-list" id="focus-presets">
+            <div class="focus-preset-item" data-focus-minutes="15">
               <span class="fp-name">Spark</span>
               <span class="fp-time">15 min</span>
             </div>
-            <div class="focus-preset-item">
+            <div class="focus-preset-item active" data-focus-minutes="25">
               <span class="fp-name">Classic</span>
               <span class="fp-time">25 min</span>
             </div>
-            <div class="focus-preset-item">
+            <div class="focus-preset-item" data-focus-minutes="50">
               <span class="fp-name">Coder</span>
               <span class="fp-time">50 min</span>
             </div>
-            <div class="focus-preset-item">
+            <div class="focus-preset-item" data-focus-minutes="52">
               <span class="fp-name">DeskTime</span>
               <span class="fp-time">52 min</span>
             </div>
-            <div class="focus-preset-item">
+            <div class="focus-preset-item" data-focus-minutes="90">
               <span class="fp-name">Deep Block</span>
               <span class="fp-time">90 min</span>
             </div>
-            <div class="focus-preset-item">
+            <div class="focus-preset-item" data-focus-minutes="0">
               <span class="fp-name">Flowtime</span>
               <span class="fp-time">Adaptive</span>
             </div>
-            <div class="focus-preset-item">
+            <div class="focus-preset-item" data-focus-minutes="0">
               <span class="fp-name">Custom</span>
               <span class="fp-time">You decide</span>
             </div>
           </div>
         </div>
         <div class="focus-visual" data-reveal>
-          <div class="focus-timer-big">
+          <div class="focus-timer-big" id="focus-timer-big">
             <svg class="focus-ring" viewBox="0 0 200 200">
               <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="4"/>
               <circle class="focus-ring-progress" cx="100" cy="100" r="90" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="4" stroke-linecap="round" stroke-dasharray="565" stroke-dashoffset="141" transform="rotate(-90 100 100)"/>
             </svg>
             <div class="focus-timer-inner">
-              <div class="focus-timer-time">18:42</div>
-              <div class="focus-timer-label">Classic Pomodoro</div>
+              <div class="focus-timer-time" id="focus-timer-time">25:00</div>
+              <div class="focus-timer-label" id="focus-timer-label">Classic Pomodoro</div>
             </div>
           </div>
         </div>
