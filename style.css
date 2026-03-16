@@ -105,6 +105,15 @@ body {
   color: var(--accent);
   text-decoration: none;
   letter-spacing: -0.03em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
 }
 
 .nav-links {
@@ -248,23 +257,86 @@ body {
   margin-bottom: 48px;
 }
 
-.hero-platforms {
+.hero-downloads,
+.cta-downloads {
   display: flex;
   gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.platform-pill {
-  display: inline-flex;
+.dl-btn {
+  display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
+  gap: 12px;
+  padding: 12px 24px;
+  border: 1px solid var(--border-hover);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.dl-btn:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.dl-btn:active {
+  transform: translateY(0);
+}
+
+.dl-btn svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.dl-btn:hover svg {
+  opacity: 1;
+}
+
+.dl-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  text-align: left;
+}
+
+.dl-label {
+  font-size: 0.6rem;
   color: var(--text-muted);
-  padding: 5px 14px;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.dl-platform {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.dl-coming-soon {
+  opacity: 0.35;
+  cursor: default;
+  border-style: dashed;
+}
+
+.dl-coming-soon:hover {
+  transform: none;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--border-hover);
+}
+
+.footer-coming-soon {
+  opacity: 0.4;
+  cursor: default;
 }
 
 .hero-scroll-hint {
@@ -1595,8 +1667,16 @@ footer {
   font-family: 'Instrument Serif', serif;
   font-size: 1.5rem;
   color: var(--accent);
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 8px;
+}
+
+.footer-logo-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
 }
 
 .footer-brand p {
@@ -1774,6 +1854,18 @@ footer {
   .hero-cta {
     flex-direction: column;
     align-items: center;
+  }
+
+  .hero-downloads,
+  .cta-downloads {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dl-btn {
+    width: 100%;
+    max-width: 260px;
+    justify-content: center;
   }
 
   .bento-card-inner {

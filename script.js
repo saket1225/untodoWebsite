@@ -302,10 +302,164 @@
   });
 
   resizeHero();
-  drawHero();
+  // drawHero() is replaced by drawHeroEnhanced() below
 
   // ============================================
-  // Phone Canvas Dot Grids — with pulse
+  // Hero Dot Grid — Task Interaction
+  // ============================================
+
+  // External glow source (from bento task items)
+  var heroGlow = { x: -1000, y: -1000, intensity: 0, targetIntensity: 0 };
+  var heroRipples = []; // { cx, cy, t, maxR }
+
+  function sendHeroGlow(pageX, pageY, intensity) {
+    // Convert page coords to hero canvas client coords
+    var heroRect = heroCanvas.getBoundingClientRect();
+    heroGlow.x = pageX - window.scrollX;
+    heroGlow.y = pageY - window.scrollY;
+    heroGlow.targetIntensity = intensity;
+  }
+
+  function clearHeroGlow() {
+    heroGlow.targetIntensity = 0;
+  }
+
+  function triggerHeroRipple(pageX, pageY) {
+    var x = pageX - window.scrollX;
+    var y = pageY - window.scrollY;
+    heroRipples.push({ cx: x, cy: y, t: 0, maxR: 250 });
+  }
+
+  // Patch drawHero to include external glow + ripples
+  cancelAnimationFrame(raf);
+
+  function drawHeroEnhanced() {
+    var dpr = window.devicePixelRatio || 1;
+    heroCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    heroCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+    // Smooth glow intensity
+    heroGlow.intensity += (heroGlow.targetIntensity - heroGlow.intensity) * 0.08;
+
+    // Update ripples
+    for (var ri = heroRipples.length - 1; ri >= 0; ri--) {
+      heroRipples[ri].t += 0.02;
+      if (heroRipples[ri].t >= 1) heroRipples.splice(ri, 1);
+    }
+
+    for (var i = 0; i < dots.length; i++) {
+      var d = dots[i];
+      var dx = mouse.x - d.x;
+      var dy = mouse.y - d.y;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      var maxDist = 180;
+
+      if (dist < maxDist) {
+        var t = 1 - dist / maxDist;
+        var ease = t * t * t;
+        d.alpha += (d.baseAlpha + ease * 0.6 - d.alpha) * 0.1;
+        d.targetRadius = 1.2 + ease * 3.5;
+      } else {
+        d.alpha += (d.baseAlpha - d.alpha) * 0.04;
+        d.targetRadius = 1.2;
+      }
+
+      // External glow from task hover
+      var glowAlpha = 0;
+      var glowRadius = 0;
+      if (heroGlow.intensity > 0.01) {
+        var gx = heroGlow.x - d.x;
+        var gy = heroGlow.y - d.y;
+        var gDist = Math.sqrt(gx * gx + gy * gy);
+        var gMaxDist = 220;
+        if (gDist < gMaxDist) {
+          var gt = 1 - gDist / gMaxDist;
+          var gEase = gt * gt;
+          glowAlpha = gEase * 0.5 * heroGlow.intensity;
+          glowRadius = gEase * 2.5 * heroGlow.intensity;
+        }
+      }
+
+      // Ripple contributions
+      var rippleAlpha = 0;
+      var rippleRadius = 0;
+      for (var ri = 0; ri < heroRipples.length; ri++) {
+        var rp = heroRipples[ri];
+        var rdx = rp.cx - d.x;
+        var rdy = rp.cy - d.y;
+        var rDist = Math.sqrt(rdx * rdx + rdy * rdy);
+        var currentR = rp.t * rp.maxR;
+        var ringWidth = 60;
+        var ringDist = Math.abs(rDist - currentR);
+        if (ringDist < ringWidth) {
+          var rFade = 1 - rp.t;
+          var rIntensity = (1 - ringDist / ringWidth) * rFade;
+          rippleAlpha = Math.max(rippleAlpha, rIntensity * 0.6);
+          rippleRadius = Math.max(rippleRadius, rIntensity * 3);
+        }
+      }
+
+      d.radius += (d.targetRadius + glowRadius + rippleRadius - d.radius) * 0.08;
+
+      // Handle toggled state
+      if (d.toggled) {
+        d.toggleAlpha += (0.7 - d.toggleAlpha) * 0.08;
+      } else {
+        d.toggleAlpha += (0 - d.toggleAlpha) * 0.06;
+      }
+
+      // Ripple effect (click)
+      if (d.ripple > 0) {
+        d.ripple *= 0.92;
+        if (d.ripple < 0.01) d.ripple = 0;
+      }
+
+      var finalAlpha = Math.max(d.alpha + glowAlpha + rippleAlpha, d.toggleAlpha);
+      var finalRadius = d.radius + d.ripple * 4;
+
+      heroCtx.beginPath();
+      heroCtx.arc(d.x, d.y, finalRadius, 0, Math.PI * 2);
+
+      if (d.toggled) {
+        heroCtx.fillStyle = 'rgba(74, 222, 128, ' + Math.min(1, finalAlpha) + ')';
+      } else if (rippleAlpha > 0.05) {
+        heroCtx.fillStyle = 'rgba(74, 222, 128, ' + Math.min(1, finalAlpha) + ')';
+      } else if (glowAlpha > 0.05) {
+        heroCtx.fillStyle = 'rgba(255, 255, 255, ' + Math.min(1, finalAlpha) + ')';
+      } else {
+        heroCtx.fillStyle = 'rgba(255, 255, 255, ' + Math.min(1, finalAlpha) + ')';
+      }
+      heroCtx.fill();
+
+      // Draw ripple ring (click toggle)
+      if (d.ripple > 0.05) {
+        heroCtx.beginPath();
+        heroCtx.arc(d.x, d.y, finalRadius + d.ripple * 12, 0, Math.PI * 2);
+        heroCtx.strokeStyle = 'rgba(74, 222, 128, ' + (d.ripple * 0.5) + ')';
+        heroCtx.lineWidth = 1;
+        heroCtx.stroke();
+      }
+    }
+
+    raf = requestAnimationFrame(drawHeroEnhanced);
+  }
+
+  drawHeroEnhanced();
+
+  // ============================================
+  // Task ↔ Hero Bridge — hover glow & complete ripple
+  // ============================================
+
+  var bentoTaskCard = document.querySelector('.bento-large');
+  if (bentoTaskCard) {
+    bentoTaskCard.addEventListener('mousemove', function (e) {
+      sendHeroGlow(e.pageX, e.pageY, 1);
+    });
+    bentoTaskCard.addEventListener('mouseleave', function () {
+      clearHeroGlow();
+    });
+  }
+
   // ============================================
 
   var themeConfigs = {
@@ -670,6 +824,9 @@
         // Confetti burst from the checkbox
         var rect = check.getBoundingClientRect();
         burstConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 25);
+
+        // Hero dot grid ripple
+        triggerHeroRipple(rect.left + rect.width / 2 + window.scrollX, rect.top + rect.height / 2 + window.scrollY);
 
         setTimeout(function () { item.classList.remove('completing'); }, 400);
       }

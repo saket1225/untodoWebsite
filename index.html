@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,7 +21,7 @@
   <!-- Nav -->
   <nav id="nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo">untodo</a>
+      <a href="/" class="nav-logo"><img src="logo.png" alt="untodo" class="nav-logo-img">untodo</a>
       <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#wallpaper">Wallpaper</a>
@@ -48,18 +50,27 @@
         </a>
         <a href="docs.html" class="btn btn-ghost">Read the docs</a>
       </div>
-      <div class="hero-platforms">
-        <div class="platform-pill">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 2.777l1.627 2.82a11.02 11.02 0 0 1 2.85 7.4c0 .756-.076 1.494-.222 2.205h-5.16a5.5 5.5 0 1 0-9.236 0H2.222A11.11 11.11 0 0 1 2 12.997c0-2.756 1.012-5.279 2.685-7.21L3.05 3.05l1.414-1.414 1.77 1.77A10.945 10.945 0 0 1 12 1.997c2.336 0 4.493.728 6.27 1.97l1.667-1.667 1.414 1.414-1.828 1.063zM12 3.997a9.001 9.001 0 0 0-8.778 11.205h17.556A9.001 9.001 0 0 0 12 3.997zM10 9v2H8V9h2zm6 0v2h-2V9h2z"/></svg>
-          <span>Android</span>
-        </div>
-        <div class="platform-pill">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.624 7.222c-.876 0-2.232-.996-3.636-.984-1.872.012-3.6 1.092-4.56 2.772-1.944 3.372-.504 8.364 1.392 11.1.924 1.344 2.028 2.844 3.48 2.784 1.392-.06 1.92-.9 3.612-.9 1.68 0 2.16.9 3.636.876 1.5-.024 2.448-1.368 3.372-2.712.948-1.38 1.344-2.736 1.368-2.808-.036-.012-2.616-1.008-2.64-3.996-.024-2.496 2.04-3.696 2.136-3.756-1.164-1.716-2.976-1.908-3.624-1.956-1.848-.156-3.6 1.068-4.536 1.068zm3.12-3.516c.768-.936 1.284-2.232 1.14-3.528-1.104.048-2.436.744-3.228 1.668-.708.828-1.332 2.16-1.164 3.432 1.236.096 2.496-.624 3.252-1.572z"/></svg>
-          <span>iOS</span>
-        </div>
-        <div class="platform-pill">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.624 7.222c-.876 0-2.232-.996-3.636-.984-1.872.012-3.6 1.092-4.56 2.772-1.944 3.372-.504 8.364 1.392 11.1.924 1.344 2.028 2.844 3.48 2.784 1.392-.06 1.92-.9 3.612-.9 1.68 0 2.16.9 3.636.876 1.5-.024 2.448-1.368 3.372-2.712.948-1.38 1.344-2.736 1.368-2.808-.036-.012-2.616-1.008-2.64-3.996-.024-2.496 2.04-3.696 2.136-3.756-1.164-1.716-2.976-1.908-3.624-1.956-1.848-.156-3.6 1.068-4.536 1.068zm3.12-3.516c.768-.936 1.284-2.232 1.14-3.528-1.104.048-2.436.744-3.228 1.668-.708.828-1.332 2.16-1.164 3.432 1.236.096 2.496-.624 3.252-1.572z"/></svg>
-          <span>Mac</span>
+      <div class="hero-downloads">
+        <a href="downloads/untodo.apk" class="dl-btn dl-android" download>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 2.777l1.627 2.82a11.02 11.02 0 0 1 2.85 7.4c0 .756-.076 1.494-.222 2.205h-5.16a5.5 5.5 0 1 0-9.236 0H2.222A11.11 11.11 0 0 1 2 12.997c0-2.756 1.012-5.279 2.685-7.21L3.05 3.05l1.414-1.414 1.77 1.77A10.945 10.945 0 0 1 12 1.997c2.336 0 4.493.728 6.27 1.97l1.667-1.667 1.414 1.414-1.828 1.063zM12 3.997a9.001 9.001 0 0 0-8.778 11.205h17.556A9.001 9.001 0 0 0 12 3.997zM10 9v2H8V9h2zm6 0v2h-2V9h2z"/></svg>
+          <div class="dl-text">
+            <span class="dl-label">Download for</span>
+            <span class="dl-platform">Android</span>
+          </div>
+        </a>
+        <a href="downloads/untodo.dmg" class="dl-btn dl-mac" download>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2 13l2-2h4V5h8v6h4l2 2-10 8L2 13zm4.828 0L12 17.172 17.172 13H16V7h-4v6H8l-1.172 0z"/></svg>
+          <div class="dl-text">
+            <span class="dl-label">Download for</span>
+            <span class="dl-platform">Mac</span>
+          </div>
+        </a>
+        <div class="dl-btn dl-ios dl-coming-soon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.624 7.222c-.876 0-2.232-.996-3.636-.984-1.872.012-3.6 1.092-4.56 2.772-1.944 3.372-.504 8.364 1.392 11.1.924 1.344 2.028 2.844 3.48 2.784 1.392-.06 1.92-.9 3.612-.9 1.68 0 2.16.9 3.636.876 1.5-.024 2.448-1.368 3.372-2.712.948-1.38 1.344-2.736 1.368-2.808-.036-.012-2.616-1.008-2.64-3.996-.024-2.496 2.04-3.696 2.136-3.756-1.164-1.716-2.976-1.908-3.624-1.956-1.848-.156-3.6 1.068-4.536 1.068zm3.12-3.516c.768-.936 1.284-2.232 1.14-3.528-1.104.048-2.436.744-3.228 1.668-.708.828-1.332 2.16-1.164 3.432 1.236.096 2.496-.624 3.252-1.572z"/></svg>
+          <div class="dl-text">
+            <span class="dl-label">Coming to</span>
+            <span class="dl-platform">App Store</span>
+          </div>
         </div>
       </div>
     </div>
@@ -408,11 +419,21 @@
       <canvas id="cta-dots"></canvas>
       <div class="cta-content" data-reveal>
         <h2>Your future self<br>is watching.</h2>
-        <p>Available now on Android, iOS, and Mac. Free to start.</p>
-        <div class="cta-buttons">
-          <a href="docs.html" class="btn btn-primary btn-lg">
-            <span>Get started</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p>Available now on Android and Mac. Free to start.</p>
+        <div class="cta-downloads">
+          <a href="downloads/untodo.apk" class="dl-btn dl-android" download>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 2.777l1.627 2.82a11.02 11.02 0 0 1 2.85 7.4c0 .756-.076 1.494-.222 2.205h-5.16a5.5 5.5 0 1 0-9.236 0H2.222A11.11 11.11 0 0 1 2 12.997c0-2.756 1.012-5.279 2.685-7.21L3.05 3.05l1.414-1.414 1.77 1.77A10.945 10.945 0 0 1 12 1.997c2.336 0 4.493.728 6.27 1.97l1.667-1.667 1.414 1.414-1.828 1.063zM12 3.997a9.001 9.001 0 0 0-8.778 11.205h17.556A9.001 9.001 0 0 0 12 3.997zM10 9v2H8V9h2zm6 0v2h-2V9h2z"/></svg>
+            <div class="dl-text">
+              <span class="dl-label">Download for</span>
+              <span class="dl-platform">Android</span>
+            </div>
+          </a>
+          <a href="downloads/untodo.dmg" class="dl-btn dl-mac" download>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2 13l2-2h4V5h8v6h4l2 2-10 8L2 13zm4.828 0L12 17.172 17.172 13H16V7h-4v6H8l-1.172 0z"/></svg>
+            <div class="dl-text">
+              <span class="dl-label">Download for</span>
+              <span class="dl-platform">Mac</span>
+            </div>
           </a>
         </div>
       </div>
@@ -424,7 +445,7 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand">
-          <span class="footer-logo">untodo</span>
+          <span class="footer-logo"><img src="logo.png" alt="untodo" class="footer-logo-img">untodo</span>
           <p>Accountability, not reminders.</p>
         </div>
         <div class="footer-links">
@@ -433,6 +454,12 @@
             <a href="#features">Features</a>
             <a href="#wallpaper">Wallpaper</a>
             <a href="#focus">Focus mode</a>
+          </div>
+          <div class="footer-col">
+            <h4>Download</h4>
+            <a href="downloads/untodo.apk" download>Android APK</a>
+            <a href="downloads/untodo.dmg" download>Mac DMG</a>
+            <a class="footer-coming-soon">iOS &mdash; Coming soon</a>
           </div>
           <div class="footer-col">
             <h4>Developers</h4>
